@@ -78,7 +78,7 @@ public class MessageService {
     }
   //去掉如下正则匹配的192.168.100.135/
   	private void replaceIp(Message message) {
-  		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.100.135)(?=/.*?\".*?/>)");
+  		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.103.135)(?=/.*?\".*?/>)");
   		Matcher ma = pa.matcher(message.getContent());
   		String re = ma.replaceAll("");
   		message.setContent(re);

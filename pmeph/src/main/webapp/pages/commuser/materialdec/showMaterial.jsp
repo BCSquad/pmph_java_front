@@ -14,7 +14,7 @@
  <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css?t=${_timestamp}" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
-	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-migrate-1.2.1.js?t=${_timestamp}"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js?t=${_timestamp}"></script>
 </head>
@@ -625,7 +625,7 @@
 								<c:if test="${list.award_unit == '1'}">国际</c:if>
 								<c:if test="${list.award_unit == '2'}">国家</c:if>
 							</td>
-							<td>${list.rewarddate=="0000.00.00"?"":ist.rewarddate}</td>
+							<td>${list.rewarddate=="0000.00.00"?"":list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>
@@ -659,7 +659,7 @@
 								<c:if test="${list.award_unit == '3'}">省部</c:if>
 								<c:if test="${list.award_unit == '4'}">市</c:if>
 							</td>
-							<td>${list.rewarddate=="0000.00.00"?"":ist.rewarddate}</td>
+							<td>${list.rewarddate=="0000.00.00"?"":list.rewarddate}</td>
 							<td>${list.note}</td>
 						</tr></c:forEach>
 					</tbody>

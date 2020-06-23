@@ -16,14 +16,14 @@
 	    <td class="">$!{c.dec_org_name}</td>
 	    <td class="">$!{c.position}</td>
 	    <td class="">$!{c.title}</td>
-	    #if($!{c.is_all_textbook_published}==true || $!{c.is_locked} == true ||$!{c.is_force_end} == true || $!{isFirstEditorLogIn} == "false" || $!{c.editorAvaliable} == 0 )
+	    #if($!{c.is_all_textbook_published}==true && $!{c.is_locked} == true &&$!{c.is_force_end} == true && $!{isFirstEditorLogIn} == "false" &&$!{c.editorAvaliable} == 0 )
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled" #if($!{c.editorAvaliable} == 0) title="已被选为主编或副主编，不能再参与编委遴选。" #end></td>
 	    #else
 	    	<td class=""><input class="check editor" value="$!{c.dec_position_id}" type="checkbox"></td>
 	    #end
 	    
 	    #if($!{is_digital_editor_optional}=="true")
-		    #if($!{c.is_all_textbook_published}==true || $!{c.is_locked} == true ||$!{c.is_force_end} == true|| $!{isFirstEditorLogIn} == "false")
+		    #if($!{c.is_all_textbook_published}==true && $!{c.is_locked} == true &&$!{c.is_force_end} == true&& $!{isFirstEditorLogIn} == "false")
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox" disabled="disabled"></td>
 		    #else
 		    	<td class=""><input class="check numEditor" value="$!{c.dec_position_id}" type="checkbox"></td>

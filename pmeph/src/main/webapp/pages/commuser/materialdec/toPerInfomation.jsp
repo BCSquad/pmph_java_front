@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.calendar.js?t=${_timestamp}"></script>
 
-	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-migrate-1.2.1.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.tipso.js?t=${_timestamp}"></script>
 <%--
@@ -72,7 +72,7 @@
 							</td>
 							<td><span>出生年月：</span>
 
-                                        <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday"
+                                        <input class="cg_input" calendar format="'yyyy-mm-dd'" name="birthday" style="z-index: 9"
                                                validator="isNonEmpty" message="出生日期不能为空"
                                                value="${userMap.birthday}" id="birthday"/>
 
@@ -93,7 +93,7 @@
 									   message="工作单位不能为空"
 									   maxlength="36"/></td>
 							<td><span>职&emsp;&emsp;务：</span>
-								<input  id="position" class="cg_input"  name="position">
+								<input  id="position" class="cg_input"  name="position" value="${userMap.position}">
 									<%--<c:forEach items="${pmphPosition}" var="dic">
 										<option value="${dic.code}" ${userMap.title == dic.code ? 'selected':''}>${dic.name}</option>
 									</c:forEach>
@@ -137,8 +137,6 @@
 
 
                                         <input class="cg_input" name="idcard" value="${userMap.idcard}" id="idcard"
-                                               validator="isNonEmpty|isCard"
-                                               message="证件号码不能为空|请填写正确的证件号码"
                                                maxlength="18"/>
 
 							</td>
@@ -908,11 +906,11 @@
 									<td><c:choose>
 										<c:when test="${status.count == 1}">
 											<img class="add_img" src="${ctx}/statics/image/add.png"
-												 onclick="add_line(this)"/>
+												 onclick="add_rwsjcbx(this)"/>
 										</c:when>
 										<c:otherwise>
 											<img class="add_img" src="${ctx}/statics/image/del.png"
-												 onclick="javascript:del_tr(this)"/>
+												 onclick="javascript:del_tr1('rwsjcbx_${status.count}')"/>
 										</c:otherwise>
 									</c:choose></td>
 								</tr>
@@ -999,7 +997,7 @@
 										<input type="hidden" name="jcb_id" value=""></td>
 									</td>
 									<td><img class="add_img" src="${ctx}/statics/image/add.png"
-											 onclick="add_line(this)"/></td>
+											 onclick="add_jcbx(this)"/></td>
 								</tr>
 							</c:if>
 							<c:forEach var="list" items="${perjcbxList}" varStatus="status">
@@ -1071,11 +1069,11 @@
 									<td><c:choose>
 										<c:when test="${status.count == 1}">
 											<img class="add_img" src="${ctx}/statics/image/add.png"
-												 onclick="add_line(this)"/>
+												 onclick="add_jcbx(this)"/>
 										</c:when>
 										<c:otherwise>
 											<img class="add_img" src="${ctx}/statics/image/del.png"
-												 onclick="javascript:del_tr(this)"/>
+												 onclick="javascript:del_tr1('jcbx_${status.count}')"/>
 										</c:otherwise>
 									</c:choose></td>
 								</tr>
@@ -1475,7 +1473,7 @@
 								<tr>
 									<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value=""
 											   validator="isNonEmpty"
-											   style="width: 410px;" placeholder="论文名称" maxlength="100"/></td>
+											   style="width: 410px;" placeholder="论文名称" maxlength="1500"/></td>
 									<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value=""
 											   validator="isNonEmpty"
 											   style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>

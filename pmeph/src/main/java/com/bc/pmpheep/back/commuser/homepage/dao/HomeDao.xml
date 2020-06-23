@@ -93,7 +93,7 @@
     <!-- 查询最新五条信息快报 -->
     <select id="queryNotice"  resultType="java.util.Map">
      select  * from cms_content  where  category_id='2' and auth_status='2' 
-     and is_deleted='0' and apporpc!=2 order by gmt_create desc limit 0,5
+     and is_deleted='0' and apporpc!=2 order by is_stick desc, gmt_create desc limit 0,5
   </select>
     <!-- 查询书籍 -->
     <select id="queryBook" parameterType="map" resultMap="Mapresult">
@@ -255,7 +255,7 @@ LIMIT 0,10
 				(SELECT * from book_user_comment 
 					where is_auth = 1 AND
 					is_hide = 0  AND
-					is_deleted = 0
+					is_deleted = 0 and front=1
 					 GROUP BY book_id )AS c
 			ON b.id = c.book_id
 			INNER JOIN writer_user AS u ON c.writer_id = u.id
@@ -420,6 +420,7 @@ LIMIT 0,10
 		buc.is_hide = 0
 	AND buc.is_deleted = 0
 	AND buc.is_auth = 1
+	and buc.front=1
 	ORDER BY
 		buc.sort_promote,
 		buc.score DESC
@@ -445,6 +446,8 @@ LIMIT 0,10
 				buc.is_hide = 0
 			AND buc.is_deleted = 0
 			AND buc.is_auth = 1
+			and buc.front=1
+
 		) t
 	</select>
 

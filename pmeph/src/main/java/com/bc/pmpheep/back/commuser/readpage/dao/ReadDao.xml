@@ -153,7 +153,7 @@
 		CASE WHEN (u.nickname IS NOT NULL && u.nickname !='') THEN u.nickname ELSE u.username END as nickname
         FROM book AS b
         INNER JOIN
-        (SELECT * from book_user_comment GROUP BY book_id  HAVING is_auth = 1 AND is_hide = 0 AND is_deleted = 0)AS c
+        (SELECT * from book_user_comment GROUP BY book_id  HAVING is_auth = 1 AND is_hide = 0 AND is_deleted = 0  and front=1)AS c
         ON b.id = c.book_id
         INNER JOIN writer_user AS u ON c.writer_id = u.id
         ORDER BY b.comments ASC

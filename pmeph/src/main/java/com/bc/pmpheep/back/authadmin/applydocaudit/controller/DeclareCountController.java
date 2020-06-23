@@ -1,10 +1,7 @@
 package com.bc.pmpheep.back.authadmin.applydocaudit.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
@@ -108,8 +105,18 @@ public class DeclareCountController extends BaseController {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("material_id", material_id);
 		paraMap.put("userId", this.getUserInfo().get("id").toString());
-		List<Map<String, Object>> list = declareCountService
-				.findNameList(paraMap);
+		List<Map<String, Object>> list;
+		String materialCreateDate = dataAuditService.findMaterialCreateDate(paraMap);
+		Date date1 = DateUtil.fomatDate(materialCreateDate);
+		Date date = DateUtil.fomatDate("2019-2-12 12:00");
+		if(date1.getTime()>date.getTime()){
+			list = declareCountService
+					.findNameList2(paraMap);
+		}else{
+			list =declareCountService
+					.findNameList(paraMap);
+		}
+
 		return list;
 	}
 
@@ -130,7 +137,17 @@ public class DeclareCountController extends BaseController {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("userId", this.getUserInfo().get("id").toString());
 		paraMap.put("material_id", material_id);
-		List<Map<String, Object>> list = declareCountService.selectAll(paraMap);
+		List<Map<String, Object>> list =new ArrayList<>();
+
+		String materialCreateDate = dataAuditService.findMaterialCreateDate(paraMap);
+		Date date1 = DateUtil.fomatDate(materialCreateDate);
+		Date date = DateUtil.fomatDate("2019-2-12 12:00");
+		if(date1.getTime()>date.getTime()){
+			list =declareCountService.selectAll2(paraMap);
+		}else{
+			list =declareCountService.selectAll(paraMap);
+		}
+
 		return list;
 	}
 
@@ -151,8 +168,19 @@ public class DeclareCountController extends BaseController {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("material_id", material_id);
 		paraMap.put("userId", this.getUserInfo().get("id").toString());
-		List<Map<String, Object>> list = declareCountService
-				.selectResults(paraMap);
+
+		List<Map<String, Object>> list =new ArrayList<>();
+		String materialCreateDate = dataAuditService.findMaterialCreateDate(paraMap);
+		Date date1 = DateUtil.fomatDate(materialCreateDate);
+		Date date = DateUtil.fomatDate("2019-2-12 12:00");
+		if(date1.getTime()>date.getTime()){
+			list =declareCountService
+					.selectResults2(paraMap);
+		}else{
+			list =declareCountService
+					.selectResults(paraMap);
+		}
+
 		return list;
 	}
 

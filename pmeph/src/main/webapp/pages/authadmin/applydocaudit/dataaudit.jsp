@@ -77,7 +77,6 @@
 					<table class="table" >
 						<thead>
 							<tr>
-								
 								<td style="width: 50px;"><input class="check editor" type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" value="0"/></td>
 								<td style="width: 50px;">序号</td>
 								<td style="width: 50px;">姓名</td>

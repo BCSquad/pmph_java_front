@@ -1,6 +1,6 @@
 //定义全局变量远程调用地址
-var remoteUrl = "medu.ipmph.com";
-var remoteVideoUrl="192.168.100.136:11100";
+var remoteUrl = "medu.pmph.com";
+var remoteVideoUrl="192.168.103.136:11100";
 
 
 
@@ -15,6 +15,7 @@ var remoteVideoUrl="192.168.100.136:11100";
  *
  */
 (function () {
+
 
 
     /*  var contextpath = contextpath ;
@@ -444,7 +445,6 @@ function Empty(v) {
     }
     return false;
 }
-
 
 //输入长度限制校验，ml为最大字节长度
 function LengthLimit(obj, ml) {

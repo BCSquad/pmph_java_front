@@ -83,7 +83,7 @@ public interface MyMessageService {
      * @param title       消息标题
      * @param content     消息内容
      */
-    void sendNewMsgWriterToPublisher(Long materialId, String title, String content,String user_id);
+    void sendNewMsgWriterToPublisher(Long materialId, String teacherName, String materialName,String user_id);
 
 
     /**

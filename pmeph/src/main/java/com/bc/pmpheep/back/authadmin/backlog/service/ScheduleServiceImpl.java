@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bc.pmpheep.back.authadmin.backlog.dao.ScheduleDao;
@@ -16,6 +18,7 @@ import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
 import com.bc.pmpheep.general.pojo.Message;
 import com.bc.pmpheep.general.service.MessageService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("com.bc.pmpheep.back.authadmin.backlog.service.ScheduleServiceImpl")
 public class ScheduleServiceImpl implements ScheduleService {
@@ -63,7 +66,18 @@ public class ScheduleServiceImpl implements ScheduleService {
 		Map<String, Object> map = scheduleDao.selectOrgUser(userId);
 		return map;
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> selectScheduleList1() {
+		List<Map<String, Object>> list = scheduleDao.selectScheduleList1();
+		return list;
+	}
+
+	@Override
+	public int updateIsRead(String msgId, Long id) {
+		return scheduleDao.updateIsRead(msgId,id);
+	}
+
 	//查询待办数据条数
 	@Override
 	public int selectScheduleCount(Map<String, Object> paraMap) {

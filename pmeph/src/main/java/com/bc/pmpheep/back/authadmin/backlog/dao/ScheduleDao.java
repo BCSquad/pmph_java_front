@@ -5,11 +5,18 @@ import java.util.Map;
 
 import com.bc.pmpheep.back.plugin.PageParameter;
 import com.bc.pmpheep.back.plugin.PageResult;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ScheduleDao {
 	
 	//查询待办事项
 	List<Map<String, Object>> selectScheduleList(PageParameter<Map<String, Object>> pageParameter);
+
+	List<Map<String, Object>> selectScheduleList1();
+
+
+	int updateIsRead(@Param("msg_id") String msgId ,@Param("id") Long id);
 	
 	//查询机构用户信息
 	Map<String, Object> selectOrgUser(Long userId);

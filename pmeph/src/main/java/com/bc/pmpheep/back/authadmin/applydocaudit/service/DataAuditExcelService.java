@@ -64,14 +64,81 @@ public class DataAuditExcelService implements ExcelDownloadService {
             /*Date date = DateUtil.fomatDate("2019-04-20 15:30");*/
 
             if(date1.getTime()>date.getTime()) {
-                String post =resultList.get(i).get("preset_position").toString();
+                String post =resultList.get(i).get("preset_position2").toString();
 
-                if(post!=null){
+                if(resultList.get(i).get("textbook_name2")==null){
+                    System.out.println(11);
+                }
+                String textbookName =resultList.get(i).get("textbook_name2").toString();
+                String post2="";
+                String result="";
+                if (post != null&&post!="") {
+                    if (ObjectUtil.isNumber(post)) {
+                        if(Integer.parseInt(post)==8){
+                            post="数字编委";
+                        }else{
+                            post = dataDictionaryDao.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, post);
+                        }
+                        result+=textbookName+"-"+post;
+                    }else{
+                        String[] splitBookPost = post.split("-");
+                        String[] splitBook = textbookName.split("-");
+                        for (int j=0;j<splitBookPost.length;j++) {
+                            String bookname = splitBook[j];
+                            System.out.println(resultList.get(i).get("did"));
+                            if (ObjectUtil.isNumber(splitBookPost[j])) {
+                                if(!splitBookPost[j].isEmpty()){
+                                if(Integer.parseInt(splitBookPost[j])==8){
+                                    post2="数字编委\n";
+                                }else{
+                                    post2 =dataDictionaryDao.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, splitBookPost[j])+"\n";
+                                }}
+                                result+=bookname+"-"+post2;
+                            }else{
+                                post2="";
+                                String[] split = splitBookPost[j].split(",");
+                                for(String thispost:split){
+                                    if(Integer.parseInt(thispost)==8){
+                                        post2+="数字编委,";
+                                    }else{
+                                        post2+= dataDictionaryDao.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, thispost)+",";
+                                    }
+
+                                }
+                                result+=bookname+"-"+post2.substring(0,post2.lastIndexOf(","))+"\n";
+
+                            }
+
+
+                        }
+
+                    }
+
+                }
+
+               /* if(post!=null&&post!=""){
                     if(ObjectUtil.isNumber(post)){
                         post = dataDictionaryDao.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,post);
+                    }else{
+                        String splits ="";
+                        if(post.length()>1){
+                            String[] split = post.split(",");
+                            for(String s :split){
+                                if(s.equals("8")){
+                                    splits+="数字编委,";
+                                }else{
+                                    splits+= dataDictionaryDao.getDataDictionaryItemNameByCode(Const.PMPH_POSITION,s)+",";
+                                }
+
+                            }
+                            post=splits.substring(0,splits.lastIndexOf(","));
+                        }
+
                     }
-                }
-                map.put("bpp",resultList.get(i).get("textbook_name")+"-"+post);
+
+
+                }*/
+                map.put("bpp",result);
 
             }else{
                 map.put("bpp", resultList.get(i).get("bpp"));

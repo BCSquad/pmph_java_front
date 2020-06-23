@@ -455,11 +455,11 @@
                                 <td>
                                     <select id="pmph_rank" name="pmph_rank">
                                         <option value="0">无</option>
-                                        <option value="1">国家</option>
-                                        <option value="2">省部</option>
-                                        <option value="3">协编</option>
-                                        <option value="4">校本</option>
-                                        <option value="5">其他</option>
+                                        <option value="1">国际</option>
+                                        <option value="2">国家</option>
+                                        <option value="3">省部</option>
+                                        <option value="4">市级</option>
+
                                     </select>
                                 </td>
                                 <td>
@@ -503,11 +503,11 @@
                                 <td>
                                     <select id="pmph_rank_${status.count}" name="pmph_rank">
                                         <option value="0" ${list.rank=='0'?'selected':'' }>无</option>
-                                        <option value="1" ${list.rank=='1'?'selected':'' }>国家</option>
-                                        <option value="2" ${list.rank=='2'?'selected':'' }>省部</option>
-                                        <option value="3" ${list.rank=='3'?'selected':'' }>协编</option>
-                                        <option value="4" ${list.rank=='4'?'selected':'' }>校本</option>
-                                        <option value="5" ${list.rank=='5'?'selected':'' }>其他</option>
+                                        <option value="1" ${list.rank=='1'?'selected':'' }>国际</option>
+                                        <option value="2" ${list.rank=='2'?'selected':'' }>国家</option>
+                                        <option value="3" ${list.rank=='3'?'selected':'' }>省部</option>
+                                        <option value="4" ${list.rank=='4'?'selected':'' }>市级</option>
+
                                     </select>
                                     <input type="hidden" id="pmph_rank_sl" name="pmph_rank_sl"
                                            value="pmph_rank_${status.count}"/>

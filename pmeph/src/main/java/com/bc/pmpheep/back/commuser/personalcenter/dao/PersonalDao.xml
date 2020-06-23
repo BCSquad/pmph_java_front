@@ -223,7 +223,7 @@
 		material a 
 	LEFT JOIN declaration c ON a.id = c.material_id AND c.user_id = #{parameter.logUserId} <!-- 登录人自己的申报 -->
 	<!-- 登录人自己已经被公布的申报 排除编委 即只查询主编副主编 决定是否有权限查看编委遴选 -->
-	LEFT JOIN dec_position_published dp ON c.id = dp.declaration_id AND dp.chosen_position NOT IN (0, 1, 8, 9)
+	LEFT JOIN dec_position_published dp ON c.id = dp.declaration_id AND dp.chosen_position NOT IN (3)
 	LEFT JOIN textbook tb ON tb.id = dp.textbook_id
 	LEFT JOIN declaration b ON a.id = b.material_id
 	AND b.online_progress != 0 

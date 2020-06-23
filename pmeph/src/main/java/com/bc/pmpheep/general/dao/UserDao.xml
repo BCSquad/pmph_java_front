@@ -24,7 +24,19 @@
         </if>
     </select>
 
-    <insert id="addNewUser" >
+	<select id="getUserInfo2" resultType="map">
+		<if test="usertype == 1">
+			select wu.*,IFNULL(wu.nickname,wu.username) as nkname
+			 from writer_user wu where wu.username=#{username}
+		</if>
+		<if test="usertype == 2">
+			select u.*
+			from org_user u where u.username=#{username}
+		</if>
+	</select>
+
+
+	<insert id="addNewUser" >
         <if test="usertype == 1">
             insert into  writer_user (username,password,nickname,realname,avatar)
             VALUES (#{username},'B1:40:2F:CF:BD:1D:92:05',#{username},'','DEFAULT');

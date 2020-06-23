@@ -39,6 +39,14 @@
 			background: #F8F8F8;
 			margin-top: 60px;
 		}
+        .select-list ul::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.2);
+        }
+        #xz1 .select-list {
+            z-index: 200 !important;
+        }
 	</style>
 </head>
 <body>
@@ -767,7 +775,7 @@ $(function () {
 								</td>
 								<td>
 									<select id="pmph_position" name="pmph_position">
-										<c:forEach items="${pmphPosition}" var="dic">
+										<c:forEach items="${pmphPosition2}" var="dic">
 											<option value="${dic.code}" >${dic.name}</option>
 										</c:forEach>
 											<%--<option value="0">无</option>
@@ -807,7 +815,7 @@ $(function () {
 								</td>
 								<td>
 									<select id="pmph_position_${status.count}" name="pmph_position">
-										<c:forEach items="${pmphPosition}" var="dic">
+										<c:forEach items="${pmphPosition2}" var="dic">
 											<option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
 											<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
@@ -887,7 +895,7 @@ $(function () {
 								</td>
 								<td>
 									<select id="jcb_position" name="jcb_position">
-										<c:forEach items="${pmphPosition}" var="dic">
+										<c:forEach items="${pmphPosition2}" var="dic">
 											<option value="${dic.code}" >${dic.name}</option>
 										</c:forEach>
 											<%--<option value="0">无</option>
@@ -928,7 +936,7 @@ $(function () {
 								</td>
 								<td>
 									<select id="jcb_position_${status.count}" name="jcb_position">
-										<c:forEach items="${pmphPosition}" var="dic">
+										<c:forEach items="${pmphPosition2}" var="dic">
 											<option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
 										</c:forEach>
 											<%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
@@ -1256,7 +1264,7 @@ $(function () {
 						<tbody>
 						<c:if test="${empty persciList[0]}">
 							<tr>
-								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
+								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value="" style="width: 410px;" placeholder="论文名称" maxlength="1500"/></td>
 								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value="" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 								<td><input class="cg_input" name="sci_factor" id="sci_factor" value="" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="20"/></td>
 								<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date" value="" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>
@@ -1266,7 +1274,7 @@ $(function () {
 							</tr> </c:if>
 						<c:forEach var="list" items="${persciList}" varStatus="status">
 							<tr id="sci_${status.count}">
-								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
+								<td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}" value="${list.paper_name}" style="width: 410px;" placeholder="论文名称" maxlength="1500"/></td>
 								<td><input class="cg_input" name="sci_journal_name" id="sci_journal_name_${status.count}" value="${list.journal_name}" style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
 								<td><input class="cg_input" name="sci_factor" id="sci_factor_${status.count}" value="${list.factor}" style="width: 170px;" placeholder="期刊SCI影响因子" maxlength="20"/></td>
 								<td><input class="cg_input" name="sci_publish_date" id="sci_publish_date_${status.count}" value="${list.publish_date}" style="width: 110px;" calendar format="'yyyy-mm-dd'" placeholder="发表时间"/></td>

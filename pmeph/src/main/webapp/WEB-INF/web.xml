@@ -50,9 +50,32 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-root.xml</param-value>
+		<param-value>
+            classpath:net/bull/javamelody/monitoring-spring.xml,
+			classpath:net/bull/javamelody/monitoring-spring-datasource.xml,
+            classpath:spring-root.xml
+        </param-value>
 	</context-param>
-	
+	<filter>
+		<filter-name>javamelody</filter-name>
+		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<!--添加登录验证，默认是不带登录验证的-->
+			<param-name>authorized-users</param-name>
+			<param-value>tomcat1:1, tomcat2:2</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>javamelody</filter-name>
+		<url-pattern>/*</url-pattern>
+		<!--用来开启异步调用-->
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	<listener>
+		<listener-class>net.bull.javamelody.SessionListener</listener-class>
+	</listener>
 
 	<!-- Session 监听 -->
 	<listener>

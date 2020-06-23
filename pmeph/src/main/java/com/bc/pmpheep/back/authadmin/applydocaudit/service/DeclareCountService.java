@@ -40,7 +40,7 @@ public interface DeclareCountService {
 	 * @throws
 	 */
 	List<Map<String, Object>> findNameList(Map<String, Object> paraMap);
-
+	List<Map<String, Object>> findNameList2(Map<String, Object> paraMap);
 
 
 	/**
@@ -52,6 +52,8 @@ public interface DeclareCountService {
 	 * @throws
 	 */
 	List<Map<String, Object>> selectAll(Map<String, Object> paraMap);
+
+	List<Map<String, Object>> selectAll2(Map<String, Object> paraMap);
 	
 	/**
 	 * 最终结果名单
@@ -62,4 +64,5 @@ public interface DeclareCountService {
 	 * @throws
 	 */
 	List<Map<String, Object>> selectResults(Map<String, Object> paraMap);
+	List<Map<String, Object>> selectResults2(Map<String, Object> paraMap);
 }

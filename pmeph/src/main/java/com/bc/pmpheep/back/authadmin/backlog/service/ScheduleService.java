@@ -13,7 +13,9 @@ public interface ScheduleService {
 	
 	//查询机构用户信息
 	Map<String, Object> selectOrgUser(Long userId);
-	
+	List<Map<String, Object>> selectScheduleList1();
+
+	int updateIsRead( String msgId , Long id);
 	//查询列表数据量
 	int selectScheduleCount(Map<String, Object> paraMap);
 	

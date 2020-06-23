@@ -1,3 +1,4 @@
+<%@ page import="com.bc.pmpheep.back.util.CodecUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="${ctx}/statics/css/jquery.selectlist.css?t=${_timestamp}"/>
     <link rel="stylesheet" href="${ctx}/statics/commuser/personalcenter/integral.css?t=${_timestamp}" type="text/css">
     <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
+    <script type="text/javascript" src="${crx}/statics/js/jquery/jquery.base64.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/reload.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.selectlist.js?t=${_timestamp}"></script>
@@ -174,7 +176,7 @@
 
 
     function showMallPoints() {
-        window.location.href = "http://www.pmphmall.com/buyerscore/index";
+        window.location.href = "c";
     }
 
     function confirmExcheang() {
@@ -202,24 +204,28 @@
         }
 
         $("#info").html("");
+
+        var oaG1 = encode64('\x22'+count+'\x22');
         window.message.confirm("您确兑换"+count+"积分吗？",{btn:["确定","取消"]},function() {
             $.ajax({
-                type: 'get',
+                type: 'post',
                 url: contextpath + 'integral/confirmPointExchange.action?ruleCode=buss',
-                data: {count: count},
+                data: {count:oaG1 },
                 async: false,
                 success: function (json) {
                     console.log(json.code);
                     if (json.code == 1) {
                         window.message.success(json.msg);
                         window.location.reload();
+                    }else{
+                        window.message.error(json.msg);
                     }
 
                 }
             })
         },function(){});
     }
-
+     var r1 = "\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50" + "\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x61\x62\x63\x64\x65\x66" + "\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76" + "\x77\x78\x79\x7a\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x2b\x2f" + "\x3d";function encode64(QrEzVB_2) {    var YX3 = "";    var khEH$4, ROakeB5, PDC6 = "";    var dlh7, j8, Ch9, tGGtFpOOQ10 = "";    var s11 = 0;    do {        khEH$4 = QrEzVB_2["\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74"](s11++);        ROakeB5 = QrEzVB_2["\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74"](s11++);        PDC6 = QrEzVB_2["\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74"](s11++);        dlh7 = khEH$4 >> 2;        j8 = ((khEH$4 & 3) << 4) | (ROakeB5 >> 4);        Ch9 = ((ROakeB5 & 15) << 2) | (PDC6 >> 6);        tGGtFpOOQ10 = PDC6 & 63;        if (isNaN(ROakeB5)) {            Ch9 = tGGtFpOOQ10 = 64        } else if (isNaN(PDC6)) {            tGGtFpOOQ10 = 64        }        YX3 = YX3 + r1["\x63\x68\x61\x72\x41\x74"](dlh7) + r1["\x63\x68\x61\x72\x41\x74"](j8) + r1["\x63\x68\x61\x72\x41\x74"](Ch9) + r1["\x63\x68\x61\x72\x41\x74"](tGGtFpOOQ10);        khEH$4 = ROakeB5 = PDC6 = "";        dlh7 = j8 = Ch9 = tGGtFpOOQ10 = ""    } while (s11 < QrEzVB_2["\x6c\x65\x6e\x67\x74\x68"]);    return YX3}
     function redeemPoints() {
         $("#info").html("")
         $.ajax({
@@ -255,6 +261,26 @@
 
 
     }
+    function encodeBase64(mingwen,times){
+        var code="";
+        var num=1;
+        if(typeof times=='undefined'||times==null||times==""){
+            num=1;
+        }else{
+            var vt=times+"";
+            num=parseInt(vt);
+        }
+        if(typeof mingwen=='undefined'||mingwen==null||mingwen==""){
+        }else{
+            $.base64.utf8encode = true;
+            code=mingwen;
+            for(var i=0;i<num;i++){
+                code=$.base64.btoa(code);
+            }
+        }
+        return code;
+    };
+
 
     function showPoints() {
         $("#pointsTab").html("");

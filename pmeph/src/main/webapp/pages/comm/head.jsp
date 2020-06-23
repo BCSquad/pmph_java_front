@@ -19,6 +19,9 @@
 <c:set var="contextpath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${ctx}/statics/comm/head.css" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/head.js?t=${_timestamp}"></script>
+<script type="text/javascript">
+    var contextpath = '${pageContext.request.contextPath}/';
+</script>
 <style>
 
     .datalist_ul {
@@ -182,6 +185,7 @@
                        href="javascript:;">注册</a>
                     <img src="${ctx}/statics/image/question.png" alt="">
                 </div>--%>
+                <a  style="display: none" onclick="alert(window.location.href)">uuuuuuuuuu</a>
                 <div class="loginout" onclick="window.location.href='${redirectUrl}?ServiceID=${serviceID}&Referer='+encodeURIComponent(window.location.href)">
                     <span class="login">您好,请登录</span>
                     <span class="logout">免费注册</span>
@@ -262,7 +266,7 @@
 
 
                     <div class="changeOrg" >
-                        <span onclick='loginOrgHome("${userInfo.username}")' style="display: none">切换机构</span>
+                        <span onclick='loginOrgHome("${userInfo.username}")' style="display">切换机构</span>
                     </div>
 
 
@@ -383,8 +387,8 @@
     function loginOrgHome(username){
         console.log(username);
         $.ajax({
-            type: "POST",
-            url:contextpath+'/innerlogin.action',
+            type: "GET",
+            url:"http://medu.pmph.com/"+'loginToChange.action',
             data:{username:username,usertype:'2'},
             success: function(json) {
             },

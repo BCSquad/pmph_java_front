@@ -55,13 +55,14 @@ public interface ChooseEditorDao {
 	 * @return
 	 */
 	Integer copyTempBySelectedIds(Map<String, Object> paraMap);
-
+	Integer copyTempBySelectedIds2(Map<String, Object> paraMap);
 	/**
 	 * 将作家申报职位表中被选定的设定为编委
 	 * @param paraMap
 	 * @return
 	 */
 	Integer updateDecPositionBySelectIds(Map<String, Object> paraMap);
+	Integer updateDecPositionBySelectIds2(Map<String, Object> paraMap);
 
 	/**
 	 * 书籍表 is_list_selected 主编是否选定编委 1为提交状态0为暂存状态
@@ -69,10 +70,12 @@ public interface ChooseEditorDao {
 	 * @return
 	 */
 	Integer updateTextBookListSelected(Map<String, Object> paraMap);
+	Integer updateDecPostion(Map<String, Object> paraMap);
 	
 	//查询所有数字编委
 	List<Map<String, Object>> queryNumEditorToBeCount(
 			PageParameter<Map<String, Object>> pageParameter);
+	List<Map<String, Object>> selectTempByTextBookId(Map<String, Object> paraMap);
 
 	/**
 	 * 查询这样的第一主编公布id

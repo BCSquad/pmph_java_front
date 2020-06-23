@@ -14,7 +14,7 @@
  <link rel="stylesheet" href="${ctx}/statics/materialdec/material.css?t=${_timestamp}" type="text/css">
 <script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.min.js?t=${_timestamp}"></script>
 	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery.jqprint-0.3.js?t=${_timestamp}"></script>
-	<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="${ctx}/resources/comm/jquery/jquery-migrate-1.2.1.js"></script>
 <script type="text/javascript" src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
 <%--
 <script type="text/javascript" src="${ctx}/resources/commuser/materialdec/materialdetail.js?t=${_timestamp}"></script>
@@ -341,11 +341,10 @@
 							<td>${list.material_name}</td>
 							<td>
 								<c:if test="${list.rank == '0'}">无</c:if>
-								<c:if test="${list.rank == '1'}">国家</c:if>
-								<c:if test="${list.rank == '2'}">省部</c:if>
-								<c:if test="${list.rank == '3'}">协编</c:if>
-								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '1'}">国际</c:if>
+								<c:if test="${list.rank == '2'}">国家</c:if>
+								<c:if test="${list.rank == '3'}">省部</c:if>
+								<c:if test="${list.rank == '4'}">市级</c:if>
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>
@@ -392,11 +391,11 @@
 							<td>${list.material_name}</td>
 							<td>
 								<c:if test="${list.rank == '0'}">无</c:if>
-								<c:if test="${list.rank == '1'}">国家</c:if>
-								<c:if test="${list.rank == '2'}">省部</c:if>
-								<c:if test="${list.rank == '3'}">协编</c:if>
-								<c:if test="${list.rank == '4'}">校本</c:if>
-								<c:if test="${list.rank == '5'}">其他</c:if>
+								<c:if test="${list.rank == '1'}">国际</c:if>
+								<c:if test="${list.rank == '2'}">国家</c:if>
+								<c:if test="${list.rank == '3'}">省部</c:if>
+								<c:if test="${list.rank == '4'}">市级</c:if>
+
 							</td>
 							<td>
 								<c:if test="${list.position == '0'}">无</c:if>

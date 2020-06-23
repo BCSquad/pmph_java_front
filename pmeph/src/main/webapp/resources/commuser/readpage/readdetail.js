@@ -443,6 +443,9 @@ function changepage() {
                 str += '</div><div class="date_content"><div class="date">'
                     + n.gmt_create
                     + '</div></div></div>' ;
+                if("correctpage"==tagName){
+                    str+='  <div class="item_content">第'+n.page+'页，第'+n.line+'行:</div>';
+                }
                 str+= '<div class="item_content">' + n.content;
                 if(n.auth_reply!=null){
                     str+='<div style="margin: 20px;background-color: #fafaf8;width: 870px">\n';
@@ -464,7 +467,6 @@ function changepage() {
 
                 if("correctpage"==tagName){
                     if(n.editor_reply!=null){
-
                         str+='<div style="margin: 20px;background-color: #fafaf8;width: 870px">\n';
                         str+='<div style="margin: 15px">';
                         str+='<div class="item_title">';

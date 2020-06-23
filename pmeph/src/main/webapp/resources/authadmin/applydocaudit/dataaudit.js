@@ -210,7 +210,7 @@ function queryBtnClick() {
 
 
 //导出word
-var exportWordBaseUrl = "http://"+remoteUrl+"/pmpheep"
+var exportWordBaseUrl = "https://"+remoteUrl+"/pmpheep"
 function exportWord() {
     if (!selectedIds || selectedIds.length <= 0) {
         message.warning("请选择要导出的作家")

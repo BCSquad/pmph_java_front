@@ -264,7 +264,7 @@ public class MyMessageServiceImpl implements MyMessageService {
     	
     	
         for (Map<String, Object> item : myMessageDao.getOrgUser(orgId)) {
-            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核、打印并快递申报纸质表");
+            this.sendMsg(new Short("0"), new Short("2"), Long.valueOf(user_id), new Short("3"), MapUtils.getLong(item, "id"), "系统消息", "贵校老师[" + teacherName + "]提交了《" + materialName + "》申报表，请及时进行资料审核");
         }
     }
 

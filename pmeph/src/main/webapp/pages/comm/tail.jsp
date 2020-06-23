@@ -62,7 +62,10 @@
             北京市朝阳区潘家园南里19号人卫大厦
         </div>
         <div class="copyright">
-            ©2014-2014  人民卫生出版社主办 京ICP备: 05067302号-2  <img class="bhh" width="20px" height="20px" src="${ctx}/statics/image/ghs.png" alt="">京公网安备 11010502031110号
+            ©2014-2019  人民卫生出版社主办 京ICP备 05067302号 
+            <div style="width:300px;margin:0 auto; padding:20px 0;">
+                     <a target=“_blank” href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031111" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">  <img src="${ctx}/statics/image/ghs.png" style="float:left;"/> <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010502031111号</p ></a>
+                    </div>
         </div>
     </div>
 </div>

@@ -562,11 +562,10 @@ function add_rwsjcbx(){
         "<td><input class='cg_input' maxlength='100' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
         "<td><select id='pmph_rank_"+num+"' name='pmph_rank'>"+
         "<option value='0'>无</option>"+
-        "<option value='1'>国家</option>"+
-        "<option value='2'>省部</option>"+
-        "<option value='3'>协编</option>"+
-        "<option value='4'>校本</option>"+
-        "<option value='5'>其他</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
         "</select></td>"+
         "<td><select id='pmph_position_"+num+"' name='pmph_position'>"+
         "<option value='0'>无</option>"+

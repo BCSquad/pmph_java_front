@@ -34,7 +34,7 @@
     <div class="content-wrapper">
         <div class="top">
             <div class="top1">活动视频</div>
-            <div class="top2" onclick="toback('${id}')"><<返回活动</div>
+            <div class="top2" onclick="toback('${id}')"><返回活动</div>
         </div>
         <div class="mid">
             <div class="video-count">

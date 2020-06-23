@@ -66,7 +66,7 @@ public class ContentService {
 
     //去掉如下正则匹配的192.168.100.135/则
 	private void replaceIp(Content content) {
-		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.100.135)(?=/.*?\".*?/>)");
+		Pattern pa = Pattern.compile("(?<=<img .{0,2000}?src=\")(http://192.168.103.135)(?=/.*?\".*?/>)");
 		Matcher ma = pa.matcher(content.getContent());
 		String re = ma.replaceAll("");
 		content.setContent(re);

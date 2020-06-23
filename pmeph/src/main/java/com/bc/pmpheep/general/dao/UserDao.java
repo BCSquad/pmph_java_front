@@ -13,6 +13,7 @@ public interface UserDao {
     public List<Map<String, Object>> getUserType(@Param("username")String username);
 
     public Map<String, Object> getUserInfo(@Param("username") String username, @Param("usertype") String usertype);
+    public Map<String, Object> getUserInfo2(@Param("username") String username, @Param("usertype") String usertype);
 
     //添加新的用户
     public int addNewUser(@Param("username") String username, @Param("usertype") String usertype);

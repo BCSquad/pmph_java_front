@@ -1,5 +1,6 @@
 package com.bc.pmpheep.general.service;
 
+import com.bc.pmpheep.controller.bean.ResponseBean;
 import com.bc.pmpheep.general.bean.FileType;
 import com.bc.pmpheep.service.exception.CheckedExceptionBusiness;
 import com.bc.pmpheep.service.exception.CheckedExceptionResult;
@@ -8,6 +9,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
+import jdk.nashorn.internal.runtime.Context;
+import jdk.nashorn.internal.runtime.ErrorManager;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +69,32 @@ public class FileService {
         return gridFSFile.getId().toString();
     }
 
+    public Boolean filleLastName(String lastName){
+        boolean flag=true;
+        switch (lastName.toLowerCase().trim()){
+            case "cmd" :
+            case "jsp" :
+            case "jspx" :
+            case "jspf" :
+            case "bat" :
+            case "vbs" :
+            case "exe" :
+            case "exee" :
+            case "htm" :
+            case "asp" :
+            case "c" :
+            case "h" :
+            case "js" :
+            case "com" :
+            case "php":
+            case "php3":
+            case "php4":
+            case "java":
+                flag=false;
+                break;
+        }
+        return flag;
+    }
     /**
      * 保存文件
      *
@@ -80,15 +109,24 @@ public class FileService {
         metaData.put(IS_IMAGE, false);
         metaData.put(TYPE, fileType.getType());
         metaData.put(PK, pk);
-        GridFSFile gridFSFile;
+        GridFSFile gridFSFile = null;
         try (InputStream inputStream = file.getInputStream()) {
-            gridFSFile
-                    = gridFsTemplate.store(inputStream,
-                    file.getOriginalFilename(),
-                    "multipart/form-data",
-                    metaData);
-            inputStream.close();
+        if(filleLastName(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1))){
+
+                gridFSFile
+                        = gridFsTemplate.store(inputStream,
+                        file.getOriginalFilename(),
+                        "multipart/form-data",
+                        metaData);
+                inputStream.close();
+
+        }else{
+            throw new Exception("不支持上传此后缀名文件");
         }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return gridFSFile.getId().toString();
     }
 

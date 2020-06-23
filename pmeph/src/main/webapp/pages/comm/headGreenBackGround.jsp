@@ -88,7 +88,7 @@
 	     			 	<div class="div-menu-child <%="account".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
 	                 	onclick="window.location.href='<c:url value="/admininfocontroller/toadmininfo.action"/>'">修改资料
 	            		</div>
-            <div style="display: none" class="div-menu-child <%="home".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
+            <div style="" class="div-menu-child <%="home".equals(request.getParameter("pageTitle"))?"div-menu-child-click":""%>"
                  onclick="loginHome('${ SESSION_USER_CONST_ORGUSER.username}')">个人首页
             </div>
 
@@ -109,8 +109,8 @@
    function loginHome(username){
 
        $.ajax({
-           type: "POST",
-           url:contextpath+'/innerlogin.action',
+           type: "GET",
+           url:"http://medu.pmph.com/"+'loginToChange.action',
            data:{username:username,usertype:'1'},
            success: function(json) {
                setTimeout(function() { window.location.href=contextpath; }, 10);

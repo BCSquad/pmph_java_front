@@ -191,8 +191,8 @@
 							<td><span><span class="btbs">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
 								<select name="sex" id="sex">
 									<option value="">-请选择-</option>
-									<option value="0">男</option>
-									<option value="1">女</option>
+									<option value="1">男</option>
+									<option value="2">女</option>
 								</select>
 							</td>
 							<td><span><span class="btbs">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
@@ -394,8 +394,8 @@
 							<td>
 								<select id="write_sex" name="write_sex">
 									<option value="" >-请选择-</option>
-									<option value="0" >男</option>
-									<option value="1">女</option>
+									<option value="1" >男</option>
+									<option value="2">女</option>
 								</select>
 							</td>
 							<td><input class="sb_input" style="width: 70px;" name="write_price" placeholder="年龄" value="" id="write_price"

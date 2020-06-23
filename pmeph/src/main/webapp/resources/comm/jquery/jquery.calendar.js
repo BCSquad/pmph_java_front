@@ -286,7 +286,7 @@ jQuery.fn.extend({
             b.removeClass("reserve").addClass("enabled");
             d.removeClass("enabled").addClass("reserve");
             $("#" + c.controlId).css({
-                "z-index": 1000
+                "z-index": 999999
             });
 
             b.css({
@@ -311,13 +311,13 @@ jQuery.fn.extend({
                 function () {
                     d.empty();
                     $("#" + c.controlId).css({
-                        "z-index": 1000
+                        "z-index": 999999
                     });
                     b.css({
-                        "z-index": 1000
+                        "z-index": 999999
                     });
                     d.css({
-                        "z-index": 1000
+                        "z-index": 999999
                     })
                 })
         }
@@ -330,7 +330,7 @@ jQuery.fn.extend({
             b.removeClass("reserve").addClass("enabled");
             d.removeClass("enabled").addClass("reserve");
             $("#" + c.controlId).css({
-                "z-index": 1000
+                "z-index": 999999
             });
             b.css({
                 "z-index": 999
@@ -354,13 +354,13 @@ jQuery.fn.extend({
                 function () {
                     d.empty();
                     $("#" + c.controlId).css({
-                        "z-index": 1000
+                        "z-index": 99999
                     });
                     b.css({
-                        "z-index": 1000
+                        "z-index": 99999
                     });
                     d.css({
-                        "z-index": 1000
+                        "z-index": 99999
                     })
                 })
         }
@@ -543,7 +543,7 @@ jQuery.fn.extend({
                     });
                     /*a.css('left', '0px');
                      a.css('top', '400px');*/
-                    a.css('z-index', '1000');
+                    a.css('z-index', '99999');
                     /*a.width(0);*/
                     /*a.height(0);*/
 

@@ -1,6 +1,9 @@
 package com.bc.pmpheep.general.controller;
 
+import com.bc.pmpheep.back.authadmin.usermanage.service.OrgUserService;
+import com.bc.pmpheep.back.authadmin.usermanage.service.WriterUserService;
 import com.bc.pmpheep.back.interceptor.LoginInterceptor;
+import com.bc.pmpheep.back.sessioncontext.SessionListener;
 import com.bc.pmpheep.back.util.Const;
 import com.bc.pmpheep.back.util.MD5;
 import com.bc.pmpheep.general.service.UserService;
@@ -37,6 +40,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionBindingEvent;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,6 +60,7 @@ public class SSOLoginoutController extends BaseController {
 
     @Autowired
     UserService userService;
+
 
     @Autowired
     LoginInterceptor interceptor;
@@ -204,7 +209,11 @@ public class SSOLoginoutController extends BaseController {
         if (types.size() == 0) {
             usertype = "1";
         } else {
-            usertype = MapUtils.getString(types.get(0), "type", "1");
+            if(types.size()>1){
+                usertype = MapUtils.getString(types.get(1), "type", "1");
+            }else{
+                usertype = MapUtils.getString(types.get(0), "type", "1");
+            }
         }
 
         Map<String, Object> user = userService.getUserInfo(username, usertype);
@@ -242,12 +251,31 @@ public class SSOLoginoutController extends BaseController {
 
 
         HttpSession session = request.getSession();
+        SessionListener sessionListener = new SessionListener();
+
+
+
         if ("1".equals(usertype)) {
             session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
             session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+            HttpSessionBindingEvent httpSessionBindingEvent = new HttpSessionBindingEvent(session,"user");
+
+            String sessionId = session.getId();
+            if(SessionListener.LOGIN_USER_MAP.containsKey(new Long(user.get("id").toString()))){//存在用户
+                if(!sessionId.equalsIgnoreCase(SessionListener.LOGIN_USER_MAP.get(new Long(user.get("id").toString())))){//判断是否相同的sessionID
+                    SessionListener.LOGOUT_USER_MAP.put(new Long(user.get("id").toString()), SessionListener.LOGIN_USER_MAP.get(new Long(user.get("id").toString())));
+                    SessionListener.LOGIN_USER_MAP.put(new Long(user.get("id").toString()), sessionId);
+                }
+            }else {
+                SessionListener.LOGIN_USER_MAP.put(new Long(user.get("id").toString()), sessionId);
+
+            }
+
+
         } else if ("2".equals(usertype)) {
             session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
             session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
+
         }
 
 
@@ -329,6 +357,7 @@ public class SSOLoginoutController extends BaseController {
             response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + home1);
         } else if ("2".equals(session.getAttribute(Const.SESSION_USER_CONST_TYPE))) {
             session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
+            session.removeAttribute(Const.SESSION_USER_CONST_ORGUSER);
             String headReferer = request.getHeader("Referer");
 
             response.sendRedirect(logouturl + "?ServiceID=" + serviceID + "&Referer=" + home1);
@@ -377,6 +406,24 @@ public class SSOLoginoutController extends BaseController {
             response.setStatus(500);
         }
     }
+    @RequestMapping(value = "loginToChange", method = RequestMethod.GET)
+    public void login2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String username = request.getParameter("username");
+        String usertype = request.getParameter("usertype");
+        Map<String, Object> user = userService.getUserInfo(username, usertype);
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/pages/comm/login.jsp?refer=" + request.getParameter("refer") + "&msg=username is not exist");
+            return;
+        }
 
+        HttpSession session = request.getSession();
+        if ("1".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_WRITER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "1");
+        } else if ("2".equals(usertype)) {
+            session.setAttribute(Const.SESSION_USER_CONST_ORGUSER, user);
+            session.setAttribute(Const.SESSION_USER_CONST_TYPE, "2");
+        }
+    }
 
 }

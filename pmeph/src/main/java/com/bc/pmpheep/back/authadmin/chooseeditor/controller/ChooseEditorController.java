@@ -7,6 +7,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.util.Const;
+import com.bc.pmpheep.back.util.ObjectUtil;
+import com.bc.pmpheep.general.service.DataDictionaryService;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,8 +41,10 @@ public class ChooseEditorController extends BaseController {
 	@Autowired
 	@Qualifier("com.bc.pmpheep.back.authadmin.chooseeditor.service.ChooseEditorServiceImpl")
 	ChooseEditorService chooseEditorService;
-	
-	
+
+	@Autowired
+	DataDictionaryService dataDictionaryService;
+
 	/**
 	 * 跳转到第一主编选择编委界面
 	 */
@@ -112,10 +118,10 @@ public class ChooseEditorController extends BaseController {
 		//将暂存表中已选中的初始化入selectedIds
 		
 		for (Map<String, Object> m : total_List_map) {
-			if ("1".equals(""+m.get("chosen_position"))||"9".equals(""+m.get("chosen_position"))) {
+			if ("3".equals(""+m.get("chosen_position"))) {
 				selectedIds += ("'"+ m.get("dec_position_id") + "',");
 			}
-			if (Integer.parseInt(m.get("chosen_position")==null?"0":m.get("chosen_position").toString())>=8) {
+			if ("8".equals(""+m.get("chosen_position"))) {
 				selectedNumIds += ("'"+ m.get("dec_position_id") + "',");
 			}
 			
@@ -197,6 +203,17 @@ public class ChooseEditorController extends BaseController {
 		
 		//查询本页
 		List<Map<String, Object>> List_map = chooseEditorService.queryEditorToBeList(pageParameter);
+		for (Map<String, Object> map:List_map
+			 ) {
+
+			String title = map.get("title").toString();
+			if (title != null) {
+				if (ObjectUtil.isNumber(title)) {
+					title = dataDictionaryService.getDataDictionaryItemNameByCode(Const.WRITER_USER_TITLE, title);
+				}
+			}
+			map.put("title", title);
+		}
 		//查询所有页
 		List<Map<String, Object>> total_List_map = chooseEditorService.queryEditorToBeCount(pageParameter);
 		//所有页总数据条数
@@ -209,7 +226,7 @@ public class ChooseEditorController extends BaseController {
 		vm_map.put("startNum", pageParameter.getStart()+1);
 		vm_map.put("isFirstEditorLogIn", isFirstEditorLogIn);
 		vm_map.put("is_digital_editor_optional", is_digital_editor_optional);
-		
+
 		String contextpath = request.getContextPath()+"/";
 		vm_map.put("contextpath", contextpath);
 		String html ="";

@@ -25,7 +25,7 @@
     <script src="${ctx}/resources/comm/jquery/jquery.scroll.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/menu.js?t=${_timestamp}"></script>
-
+    <script src="${ctx}/statics/js/layer/layer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/commuser/homepage/homepage.js?t=${_timestamp}"></script>
 </head>
 <body>
@@ -35,6 +35,7 @@
 <input type="hidden" id="auto_play" value="${adInfo1.auto_play}">
 <input type="hidden" id="animation_interval" value="${adInfo1.animation_interval}">
 <input type="hidden" id="is_org_user" value="${userInfo.is_org_user}">
+<input type="hidden" id="roll" value="${adInfo1.roll}">
 <div class="body">
     <div class="content-wrapper">
         <div class="area-1">
@@ -141,7 +142,7 @@
             </div>
         </div>
         <div class="notice area-2">
-            <div class="title" style="float: left">
+            <div class="title" style="float: left"  onchange="">
                 <div class="line bgcolor-blue" style="float: left"></div>
                 <div class="name color-blue" style="float: left">
                     <div class="ggpng"style="margin-left: 30px;margin-top: 42px"></div>
@@ -719,6 +720,20 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+    /*$(function() {
+        setTimeout(function() {
+            layer.open({
+                title:'通知',
+                type: 1,
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                area: ['400px', '200px'],
+                shadeClose: true, //开启遮罩关闭
+                content: '\<\div style="padding:20px;">尊敬的各位专家用户：由于我社网络系统升级，“人卫e教”平台域名自2019年11月1日起更改为<a target="_blank" href="http://medu.pmph.com">medu.pmph.com</a>，敬请惠存。由此给您带来的不便，我们深表歉意，感谢您的理解与支持！\<\/div>'
+            });
+        }, 300);
+
+    });*/
 </script>
 </body>
 

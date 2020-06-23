@@ -162,7 +162,7 @@ function checkRealName(){
 
     if(nameFlag){
         window.message.confirm("申报资料中的姓名不能为空且不能包含数字,请转跳后修改为正确的真实姓名",{btn:["确定转跳"]},function(){
-            window.location.href='http://medu.ipmph.com/userinfo/touser.action';
+            window.location.href='http://medu.pmph.com/userinfo/touser.action';
         },function(){
             return fasle;
         });
@@ -780,7 +780,7 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='人民卫生出版社' readonly='true' style='width: 100px;' /></td>" +
+        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='' readonly='true' style='width: 100px;' /></td>" +
         "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='100' class='cg_input' name='jc_note' value='' style='width: 100px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
@@ -856,11 +856,10 @@ function add_rwsjcbx(){
         "<td><input class='cg_input' maxlength='100' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
         "<td><select id='pmph_rank_"+num+"' name='pmph_rank'>"+
         "<option value='0'>无</option>"+
-        "<option value='1'>国家</option>"+
-        "<option value='2'>省部</option>"+
-        "<option value='3'>协编</option>"+
-        "<option value='4'>校本</option>"+
-        "<option value='5'>其他</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
         "</select></td>"+
         "<td><select id='pmph_position_"+num+"' name='pmph_position'>"+
         "<option value='0'>无</option>"+
@@ -908,11 +907,11 @@ function add_jcbx(){
         "<td><input class='cg_input' maxlength='100' name='jcb_material_name' id='jcb_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
         "<td><select id='jcb_rank_"+num+"' name='jcb_rank'>"+
         "<option value='0'>无</option>"+
-        "<option value='1'>国家</option>"+
-        "<option value='2'>省部</option>"+
-        "<option value='3'>协编</option>"+
-        "<option value='4'>校本</option>"+
-        "<option value='5'>其他</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
+
         "</select></td>"+
         "<td><select id='jcb_position_"+num+"' name='jcb_position'>"+
         "<option value='0'>无</option>"+
@@ -1029,7 +1028,7 @@ function add_sci(){
     var num = fnt();
     var $table = $("#tab_sci");
     var $tr = $("<tr id='sci_"+num+"'>"+
-        "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 410px;' placeholder='论文名称' maxlength='100'/></td>"+
+        "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 410px;' placeholder='论文名称' maxlength='1500'/></td>"+
         "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='50'/></td>"+
         "<td><input class='cg_input' name='sci_factor' id='sci_factor_"+num+"' value='' style='width: 170px;' placeholder='期刊SCI影响因子' maxlength='20'/></td>"+
         "<td><input class='cg_input' name='sci_publish_date' id='sci_publish_date_"+num+"' value='' style='width: 110px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表时间'/></td>"+

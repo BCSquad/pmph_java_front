@@ -71,6 +71,8 @@ public class PersonalCenterController extends BaseController {
 		Map<String, Object> vm_map = new HashMap<String, Object>();
 
 		Map<String, Object> paraMap = new HashMap<String, Object>();
+
+
 		String contextpath = request.getContextPath() + "/";
 		String logUserId = getUserInfo().get("id").toString();
 		Map<String, Object> permap = new HashMap<String, Object>();
@@ -210,7 +212,6 @@ public class PersonalCenterController extends BaseController {
 			String[] names = { "auth_progress", "is_staging", "isMine", "pageinfo1","is_handled" };
 			String[] namesChi = { "bookname" };
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
-
 			pageParameter.setParameter(paraMap);
 			List<Map<String, Object>> List_map = personalService.queryMyTopicChoose(pageParameter);
 			count = personalService.queryMyTopicChooseCount(pageParameter);
@@ -263,7 +264,6 @@ public class PersonalCenterController extends BaseController {
 			String[] names = {"is_long"};
 			String[] namesChi = {};
 			queryConditionOperation(names, namesChi, request, mv, paraMap, vm_map);
-
 			Map<String,Object> userMap=getUserInfo();
 			//Long writerId=Long.valueOf(userMap.get("id").toString());
 			Long writerId= Long.parseLong(permap.get("id").toString());
@@ -341,6 +341,24 @@ public class PersonalCenterController extends BaseController {
 
 		return mv;
 	}
+	public void filterJS(Map<String,Object> paraMap){
+		Set<Map.Entry<String, Object>> entries = paraMap.entrySet();
+		Iterator<Map.Entry<String, Object>> iterator = entries.iterator();
+		while (iterator.hasNext()){
+			Map.Entry<String, Object> next = iterator.next();
+			if(!next.getKey().contains("path")){
+				String str="; \' \\\" < > () , \\ / script svg alert confirm prompt onload onmouseover onfocus onerror xss";
+				String[] split = str.split(" ");
+				for(String s:split){
+					if(next.getValue()!=null)
+					if(next.getValue().toString().contains(s)){
+						next.setValue(next.getValue().toString().replaceAll(s,""));
+					}
+				}
+			}
+			System.out.println(paraMap);
+		}
+	}
 
 	@RequestMapping(value = "authorReply", method = RequestMethod.POST)
 	@ResponseBody
@@ -390,9 +408,11 @@ public class PersonalCenterController extends BaseController {
 	private void queryConditionOperation(String[] names, String[] namesChi, HttpServletRequest request,
 			ModelAndView modelAndView, Map<String, Object> paraMap, Map<String, Object> vm_map)
 			throws UnsupportedEncodingException {
+
 		for (String queryName : names) {
 			// 查询条件
 			String queryValue = request.getParameter(queryName);
+
 			// 封装查询条件入pageParameter 用以查询
 			paraMap.put(queryName, queryValue);
 			// 传回查询条件
@@ -402,8 +422,19 @@ public class PersonalCenterController extends BaseController {
 		}
 		for (String queryName : namesChi) {
 			// 查询条件
+
 			String queryValue = request.getParameter(queryName);
+
+
 			queryValue = java.net.URLDecoder.decode((queryValue != null ? queryValue : ""), "UTF-8");
+
+			String str="; \' \\\" \" < > () , \\ / script svg alert confirm prompt onload onmouseover onfocus onerror xss";
+			String[] split = str.split(" ");
+			for(String s:split){
+				if(queryValue.contains(s)){
+					queryValue=queryValue.replaceAll(s,"");
+				}
+			}
 			// 封装查询条件入pageParameter 用以查询
 			paraMap.put(queryName, queryValue);
 			// 传回查询条件
@@ -411,6 +442,7 @@ public class PersonalCenterController extends BaseController {
 			// 放入模版空间
 			vm_map.put(queryName, queryValue);
 		}
+
 	}
 
 	/*
@@ -995,7 +1027,7 @@ public class PersonalCenterController extends BaseController {
 				JcbjMap.put("is_digital_editor", "".equals(request.getParameter(jc_is_digital_editor[i])) ? null:request.getParameter(jc_is_digital_editor[i]));
 				JcbjMap.put("position", "".equals(request.getParameter(jc_position[i])) ? null:request.getParameter(jc_position[i]));
 				JcbjMap.put("note", jc_note[i]);
-				JcbjMap.put("publisher", jc_publisher[i]==null?"人民卫生出版社":jc_publisher[i]);
+				JcbjMap.put("publisher", jc_publisher==null?"人民卫生出版社":jc_publisher[i]);
 				JcbjMap.put("publish_date", "".equals(jc_publish_date[i]) ? null:jc_publish_date[i]);
 
 				JcbjMap.put("sort", i);

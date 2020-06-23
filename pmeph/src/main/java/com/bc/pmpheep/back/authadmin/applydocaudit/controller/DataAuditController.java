@@ -125,36 +125,52 @@ public class DataAuditController extends BaseController{
 					Date date = DateUtil.fomatDate("2019-04-12 12:00");
 					/*Date date = DateUtil.fomatDate("2019-4-19 17:00");*/
 					if(date1.getTime()>date.getTime()) {
-						String post = map.get("preset_position").toString();
+						String post = map.get("preset_position2").toString();
+						String textbookName = map.get("textbook_name2").toString();
 						String post2="";
-						if (post != null) {
+						String result="";
+						if (post != null&&post!="") {
 							if (ObjectUtil.isNumber(post)) {
 								if(Integer.parseInt(post)==8){
 									post="数字编委";
 								}else{
 									post = dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, post);
 								}
+								result+=textbookName+"-"+post;
 							}else{
-								String[] split = post.split(",");
-								for (String s: split
-									 ) {
-									if(Integer.parseInt(s)==8){
-										post2+="数字编委,";
+								String[] splitBookPost = post.split("-");
+								String[] splitBook = textbookName.split("-");
+								for (int i=0;i<splitBookPost.length;i++) {
+									String bookname = splitBook[i];
+									if (ObjectUtil.isNumber(splitBookPost[i])) {
+										if(Integer.parseInt(splitBookPost[i])==8){
+											post2="数字编委\n";
+										}else{
+											post2 =dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, splitBookPost[i])+"\n";
+										}
+										result+=bookname+"-"+post2;
 									}else{
-										post2+=dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, s)+",";
+										post2="";
+										String[] split = splitBookPost[i].split(",");
+										for(String thispost:split){
+											if(Integer.parseInt(thispost)==8){
+												post2+="数字编委,";
+											}else{
+												post2+= dataDictionaryService.getDataDictionaryItemNameByCode2(Const.PMPH_POSITION, thispost)+",";
+											}
+
+										}
+										result+=bookname+"-"+post2.substring(0,post2.lastIndexOf(","))+"\n";
+
 									}
 
-								}
-								post=post2.substring(0,post2.lastIndexOf(","));
 
+								}
 
 							}
 
-
-
-
 						}
-						map.put("bpp", map.get("textbook_name") + "-" + post);
+						map.put("bpp",result);
 
 					}
 					String tit = map.get("dtitle").toString();
@@ -255,7 +271,7 @@ public class DataAuditController extends BaseController{
 						String post = map.get("preset_position").toString();
 
 						String post2="";
-						if (post != null) {
+						if (post != null&&post!="") {
 							if (ObjectUtil.isNumber(post)) {
 								if(Integer.parseInt(post)==8){
 									post="数字编委";

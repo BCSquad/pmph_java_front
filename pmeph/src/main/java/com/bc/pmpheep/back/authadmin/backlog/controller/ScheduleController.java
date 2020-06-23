@@ -3,14 +3,13 @@ package com.bc.pmpheep.back.authadmin.backlog.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bc.pmpheep.back.commuser.mymessage.service.MyMessageService;
 import com.bc.pmpheep.back.util.RouteUtil;
+import com.bc.pmpheep.general.pojo.Message;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,6 +38,26 @@ public class ScheduleController extends BaseController{
 	
 	@Autowired
 	MessageService mssageService;
+
+
+	/*//查询待办事项列表
+	@RequestMapping(value="/scheduleList")
+	public void toScheduleList2 (HttpServletRequest  request) {
+		List<Map<String, Object>> maps = scheduleService.selectScheduleList1();
+		for(Map<String, Object> map:maps){
+			String content="贵校老师[" + MapUtils.getString(map, "NAME") + "]提交了《" + MapUtils.getString(map, "material_name") + "》申报表，请及时进行资料审核";
+			Message message = new Message();
+			message.setContent(content);
+			mssageService.add(message);
+			String id = message.getId();
+			Map<String, Object> message1 = new HashMap<>();
+			message1.put("msg_id",id);
+			message1.put("id" , MapUtils.getLongValue(map,"ID"));
+
+			scheduleService.updateIsRead(id,MapUtils.getLongValue(map,"ID"));
+		}
+
+	}*/
 	
 	//查询待办事项列表
 	@RequestMapping(value="/scheduleList")
@@ -149,7 +168,7 @@ public class ScheduleController extends BaseController{
 		return mv;
 		
 	}
-	
+
 	//查询办事记录列表
 	@RequestMapping(value="/eventRecord")
 	public ModelAndView toEventRecord(HttpServletRequest  request) throws ParseException{

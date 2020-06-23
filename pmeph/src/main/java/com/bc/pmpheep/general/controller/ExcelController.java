@@ -66,7 +66,7 @@ public class ExcelController {
 
         WritableCellFormat wcf_col_title = new WritableCellFormat(wf_col_title);
         wcf_col_title.setAlignment(Alignment.CENTRE);
-        if (excleService.getTitleColour() == null) {
+       if (excleService.getTitleColour() == null) {
             wcf_col_title.setBackground(Colour.ICE_BLUE);
         } else {
             wcf_col_title.setBackground(excleService.getTitleColour());
@@ -126,6 +126,7 @@ public class ExcelController {
         response.setHeader("Content-Disposition", "attachment;filename=\"" + new String((excelTitle + ".xls").getBytes("gbk"), "ISO-8859-1") + "\"");
         //response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(excleService.getTitle() + ".xls", "UTF-8"));
         book.write();
+
         book.close();
     }
 

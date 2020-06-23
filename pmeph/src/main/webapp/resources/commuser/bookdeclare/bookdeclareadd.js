@@ -128,8 +128,8 @@ function add_zjky(){
 			"<td><input class='sb_input' style='width: 120px;' maxlength='40' id='write_realname_"+num+"' name='write_realname' placeholder='姓名' value=''/></td>"+
 			"<td><select id='write_sex_"+num+"'  name='write_sex'>"+
 					"<option value=''>-请选择-</option>" +
-					"<option value='0'>男</option>"+
-					"<option value='1'>女</option>"+
+					"<option value='1'>男</option>"+
+					"<option value='2'>女</option>"+
 				"</select></td>"+
 			"<td><input class='sb_input' style='width: 70px;' id='write_price_"+num+"' name='write_price' placeholder='年龄' value=''" +
 			"onkeyup='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);' onafterpaste='this.value=this.value.replace(/(\\D|^0+)/g,&#39;&#39;);this.value=this.value.replace(/^[^0-1]\\d{2}$/g,199);'"+

@@ -108,7 +108,7 @@ $(function () {
         optionHeight: 30
     });
     $('.book').selectlist({
-        zIndex: 100,
+        zIndex: 200,
         width: 200,
         height: 30,
         optionHeight: 30,
@@ -178,7 +178,7 @@ function checkRealName(flag){
 
     if(nameFlag){
         window.message.confirm("申报资料中的姓名不能为空且不能包含数字,请转跳后修改为正确的真实姓名",{btn:["确定转跳"]},function(){
-            window.location.href='http://medu.ipmph.com/userinfo/touser.action';
+            window.location.href='http://medu.pmph.com/userinfo/touser.action';
         },function(){
             return fasle;
         });
@@ -667,8 +667,8 @@ function delfile (id,name,a,s){
 }
 //追加图书添加div
 function addTsxz(){
-    console.log(result);
-    console.log(1);
+
+
     //是否职位多选
     var is_multi_position = $("#is_multi_position").val();
     var select_nr = $("#select_nr").val();
@@ -853,7 +853,7 @@ function add_jccb(){
         "<td><input type='radio' name='jc_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
         "</tr></table>"+
         "<input type='hidden' name='jc_is_digital_editor' value='jc_is_digital_editor_"+num+"' /></td>"+
-        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='人民卫生出版社' readonly='true' style='width: 100px;' /></td>" +
+        "<td><input maxlength='20' class='cg_input' name='jc_publisher' value='' readonly='true' style='width: 100px;' /></td>" +
         "<td><input class='cg_input' name='jc_publish_date' id='jc_publish_date_"+num+"' value='' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100'  style='width: 100px;'/></td>"+
         "<td><input maxlength='100' class='cg_input' name='jc_note' value='' style='width: 100px;' placeholder='备注'/>" +
         "<input type='hidden' name='zdjy' value='jc_material_name_"+num+"' />" +
@@ -927,11 +927,10 @@ function add_rwsjcbx(){
         "<td><input class='cg_input' maxlength='100' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
         "<td><select id='pmph_rank_"+num+"' name='pmph_rank'>"+
         "<option value='0'>无</option>"+
-        "<option value='1'>国家</option>"+
-        "<option value='2'>省部</option>"+
-        "<option value='3'>协编</option>"+
-        "<option value='4'>校本</option>"+
-        "<option value='5'>其他</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
         "</select></td>"+
         "<td><select id='pmph_position_"+num+"' name='pmph_position'>"+
         "<option value='0'>无</option>"+
@@ -978,11 +977,10 @@ function add_jcbx(){
         "<td><input class='cg_input' maxlength='100' name='jcb_material_name' id='jcb_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
         "<td><select id='jcb_rank_"+num+"' name='jcb_rank'>"+
         "<option value='0'>无</option>"+
-        "<option value='1'>国家</option>"+
-        "<option value='2'>省部</option>"+
-        "<option value='3'>协编</option>"+
-        "<option value='4'>校本</option>"+
-        "<option value='5'>其他</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
         "</select></td>"+
         "<td><select id='jcb_position_"+num+"' name='jcb_position'>"+
         "<option value='0'>无</option>"+
@@ -1097,7 +1095,7 @@ function add_sci(){
     var num = fnt();
     var $table = $("#tab_sci");
     var $tr = $("<tr id='sci_"+num+"'>"+
-        "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 410px;' placeholder='论文名称' maxlength='100'/></td>"+
+        "<td><input class='cg_input' name='sci_paper_name' id='sci_paper_name_"+num+"' value='' style='width: 410px;' placeholder='论文名称' maxlength='1500'/></td>"+
         "<td><input class='cg_input' name='sci_journal_name' id='sci_journal_name_"+num+"' value='' style='width: 130px;' placeholder='期刊名称' maxlength='50'/></td>"+
         "<td><input class='cg_input' name='sci_factor' id='sci_factor_"+num+"' value='' style='width: 170px;' placeholder='期刊SCI影响因子' maxlength='20'/></td>"+
         "<td><input class='cg_input' name='sci_publish_date' id='sci_publish_date_"+num+"' value='' style='width: 110px;' calendar format=\"'yyyy-mm-dd'\" placeholder='发表时间'/></td>"+
@@ -1180,40 +1178,45 @@ function del_tr(trId){
 
 //提交   类型1 表示提交  2 表示暂存
 function buttAdd(type){
+
+    var els =document.getElementsByName("preset_position");
+    $("")
     $("#realname").removeAttr("disabled");
     $("#sex").removeAttr("disabled");
     $("#birthday").removeAttr("disabled");
     $("#idcard").removeAttr("disabled");
-    $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"})
+    $('#sbdw_name').tipso({validator: "isNonEmpty", message: "申报单位不能为空"});
     //if(checkEqual("textbook_id")) {
         if (type == '2') { //表示暂存
-            //避免重复点击
-            document.getElementById('buzc').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            document.getElementById('butj').onclick = function () {
-                window.message.warning("请不要重复点击");
-            };
-            $("#allTable input").each(function () {
-                if(!!!this.value)
-                    if (this.getAttribute('calendar') != null) {
-                        this.value ="0000-00-00";
-                    } else {
-                        this.value = "-";
+            if(checkBoxInfo() &&radioInfo()) {
+                //避免重复点击
+                document.getElementById('buzc').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };
+                document.getElementById('butj').onclick = function () {
+                    window.message.warning("请不要重复点击");
+                };
+                $("#allTable input").each(function () {
+                    if (!!!this.value)
+                        if (this.getAttribute('calendar') != null) {
+                            this.value = "0000-00-00";
+                        } else {
+                            this.value = "-";
+                        }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
+                    data: $('#objForm').serialize(),// 您的formid
+                    async: false,
+                    success: function (json) {
+                        if (json.msg == 'OK') {
+                            window.message.success("操作成功,正在跳转页面");
+                            window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
+                        }
                     }
-            });
-            $.ajax({
-                type: "POST",
-                url: contextpath + 'material/doMaterialAdd.action?sjump=2&type=' + type,
-                data: $('#objForm').serialize(),// 您的formid
-                async: false,
-                success: function (json) {
-                    if (json.msg == 'OK') {
-                        window.message.success("操作成功,正在跳转页面");
-                        window.location.href = contextpath + "personalhomepage/tohomepage.action?pagetag=jcsb";
-                    }
-                }
-            });
+                });
+            }
         } else { //表示提交
             checkLb();
             if(!sta){
@@ -1224,7 +1227,7 @@ function buttAdd(type){
             if(nameFlag){
                 return;
             }
-            if(checkEqual("textbook_id") && checkBoxInfo() && $.fireValidator()){
+            if(checkEqual("textbook_id") && checkBoxInfo() &&radioInfo()&& $.fireValidator()){
                 $("#allTable input").each(function () {
                     if(!!!this.value)
                         if (this.getAttribute('calendar') != null) {
@@ -1241,7 +1244,7 @@ function buttAdd(type){
                         layer.close(index);
                         var username = $("#username").val();
                         var realname = $("#realname").val();
-                        if(checkEqual("textbook_id")&&checkBoxInfo()){
+                        if(checkEqual("textbook_id")&&checkBoxInfo()&&radioInfo()){
                             if (username == realname) {
                                 if (confirm("您填写的申报姓名和账号一致，是否已当前姓名提交申报！")) {
                                     commit(type);
@@ -1633,28 +1636,36 @@ function getNowFormatDate() {
 
 //判断checkbox是否被选中
 function checkBoxInfo() {
-    var els =document.getElementsByName("preset_position");
-    for (var i = 0, j = els.length; i < j; i++){
-        var a = $("input[name='"+els[i].value+"']:checked").val();
-        if(a == undefined){
-            window.message.warning("请选择申报的职位！");
-            return false;
+    var flags=true;
+    if(is_multi_position=='1') {
+        var els = document.getElementsByName("preset_position");
+        for (var i = 0, j = els.length; i < j; i++) {
+            var a = $("input[name='" + els[i].value + "']:checked").val();
+            if (a == undefined) {
+                window.message.warning("请选择申报的职位！");
+                flags= false;
+            }
         }
+
     }
-    return true;
+    return flags;
 }
 
 //判断radio是否被选中
 function radioInfo(){
     //  alert(document.getElementById("zw_1").checked);
+    var flags=true;
+    if(is_multi_position!='1'){
     var els =document.getElementsByName("preset_position");
     for (var i = 0, j = els.length; i < j; i++) {
         var zw = els[i].value;
         var list = $('input:radio[name='+zw+']:checked').val();
         if (list == null) {
             window.message.warning("请选择申报的职位！");
-            return false;
+            flags= false;
         }
     }
-    return true;
+
+    }
+    return flags;
 }

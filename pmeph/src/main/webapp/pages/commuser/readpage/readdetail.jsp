@@ -597,7 +597,7 @@
                         <input type="hidden" value="${start}" class="start feedpage">
 
                         <span class="moreothers" onclick="changepage()"
-                              id="moreothers">${shortcom=='nothing' ? '[暂无评论]':'加载更多...'}</span>
+                              id="moreothers">${shortcom=='nothing' ? '[加载中]':'加载更多...'}</span>
                         <div class="morecom" style="display: none;"></div>
                     </div>
                     <%--<div id="longcompage">
@@ -688,7 +688,7 @@
             </div>
             <hr style=" height:1px;border:none;border-top:1px solid #f1f1f1;margin-top: 10px;">
             <c:forEach items="${source}" var="list" varStatus="status">
-                <div class="right_20" style="border: none;">
+                <div class="right_40" style="border: none;">
                     <a href="#"><div class="downimg" onclick="window.location.href='${ctx}/file/download/${list.file_id}.action'">${list.source_name}</div></a>
                     <div class="right_22"></div>
                     <br />

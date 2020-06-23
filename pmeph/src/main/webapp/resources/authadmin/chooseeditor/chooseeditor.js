@@ -13,7 +13,7 @@ Array.prototype.removeByValue = function(val) {
 	};
 	
 $(function(){
-	if ($("#is_published").val() == "true"|| $("#is_locked").val() == "true"||$("#is_force_end").val() == "true"||$("#isFirstEditorLogIn").val() == "false") {
+	if ($("#is_published").val() == "true"&& $("#is_locked").val() == "true"&&$("#is_force_end").val() == "true"&&$("#isFirstEditorLogIn").val() == "false") {
 		$("#handleBtn").hide();
 	}else{
 		$("#handleBtn").show();

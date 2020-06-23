@@ -1,4 +1,5 @@
 $(function() {
+
     //渐入渐出
     /*setTimeout(function(){
         $(".btm-tips").animate({bottom: '20px', opacity: 1}, 280, 'linear', function () {
@@ -17,10 +18,10 @@ $(function() {
 	$('.banner').scroll({
 		picElem : $('#move'), // 图片父级
 		ctrlElem : $('#ctrl'), // 控制条父级(包括小圆点和左右箭头)
-		isLibs : true, // 是否创建底部小圆点(样式均可自定义调整),默认向lib添加单独类名，详情见调用后dom结构
-		isArrows : true, // 是否创建左右箭头(样式均可自定义调整)
+		isLibs :$("#roll").val()==='false'?false:true, // 是否创建底部小圆点(样式均可自定义调整),默认向lib添加单独类名，详情见调用后dom结构
+		isArrows :$("#roll").val()==='false'?false:true, // 是否创建左右箭头(样式均可自定义调整)
 		autoPlay : $("#auto_play").val(), // 是否自动播放
-		playTime : $("#animation_interval").val(), // 自动播放间隔时间
+		playTime : $("#roll").val()==='false'?999999:$("#animation_interval").val(), // 自动播放间隔时间
 		playSpeed : 700, // 图片切换速度
 		effect : 'left' // 轮播的改变方式 top(向上) left(向左) fade(淡入淡出)
 	});

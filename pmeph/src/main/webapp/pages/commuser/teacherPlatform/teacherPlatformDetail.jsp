@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html>z
 <head>
     <title>活动详情页</title>
     <script type="text/javascript">
@@ -21,6 +21,20 @@
     <script type="text/javascript" src="${ctx}/resources/comm/ckplayer/ckplayer.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/jquery/jquery.js?t=${_timestamp}"></script>
     <script src="${ctx}/resources/comm/base.js?t=${_timestamp}"></script>
+    <style>
+        video::-internal-media-controls-download-button {
+            display:none;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+
+    </style>
 </head>
 <body>
 <jsp:include page="/pages/comm/head.jsp">
@@ -71,21 +85,28 @@
             <c:if test="${status.index<3}">
                 <div class="video" style="margin-top: 20px;float: left;margin-left: 30px">
             <c:if test="${status.index==0}">
-                    <video  class="video-a"   autoplay   poster  loop preload  controls  x5-playsinline="" playsinline="" src="http://${_remoteVideoUrl}/v/play/${list.path}" ></video>
+
+                    <div class="video-a" id="video-${status.index+1}"
+                         src="http://${_remoteVideoUrl}/v/play/${list.path}"
+                         poster="${ctx}/image/${list.cover}.action" type="mp4">
+                    </div>
+                    <div class="video-name">${list.title}</div>
 
             </c:if>
             <c:if test="${status.index>0}">
 
-                <video  class="video-a"    poster  loop buffered preload  controls  x5-playsinline="" playsinline="" src="http://${_remoteVideoUrl}/v/play/${list.path}" ></video>
+                    <div class="video-a" id="video-${status.index+1}"
+                         src="http://${_remoteVideoUrl}/v/play/${list.path}"
+                         poster="${ctx}/image/${list.cover}.action" type="mp4">
+                    </div>
+                    <div class="video-name">${list.title}</div>
+
             </c:if>
                 <%--<div class="video-a" id="video-${status.index+1}" type="mp4"
                          src="http://${_remoteVideoUrl}/v/play/${list.path}"
                          poster="${ctx}/image/${list.cover}.action" onclick="addid('${list.id}','${list.clicks}')">
                     </div>--%>
-                    <div class="detail">
-                        <div class="video-name">${list.title}</div>
-                        <div class="clicks">${list.clicks}</div>
-                    </div>
+
                 </div>
             </c:if>
         </c:forEach>
@@ -116,6 +137,7 @@
             $(function () {
                 $(".video-a").each(function () {
                     var $this = $(this);
+                    console.log($this);
                     var videoObject = {
                         container: "#" + $this.attr("id"),
                         variable: 'player',

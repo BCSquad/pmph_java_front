@@ -41,6 +41,7 @@ window.onload = function(){
  */
 function add_line(t) {
     var $tr =$(t).parent("td").parent("tr");
+    console.log($tr);
     var $tbody = $tr.parent();
     //复制被点击行的outerHTML作为新行模板
     var $tr_new = $($tr.prop("outerHTML"));
@@ -55,16 +56,38 @@ function add_line(t) {
     });
     //行号
     var count = $tbody.children("tr").length+1;
+    console.log(count);
     //替换掉模板中关键属性的行号
+    var cout1=0;
     $tr_new.find("input").each(function (n) {
         var $t = $(this);
+
         replace_count($t,"id",count);
-        replace_count($t,"name",count);
+        if(cout1!==0){
+            if($t.attr("type")=="radio"){
+                replace_count($t,"name",count);
+            }
+        }
+
+
         if(typeof($t.attr("calendar"))!="undefined" ){
             replace_count($t,"max",count);
             replace_count($t,"min",count);
         }
-    })
+
+        if($t.attr("class")=="select-button"){
+            $('#'+$t.attr("id")).selectlist({
+                zIndex: 100000, //每生成一个 就会自减1 已使各下拉框不互相遮盖 但一旦小于0 就会被0层元素遮盖而看不到下拉框 故设大
+                width: 110,
+                height: 30,
+                optionHeight: 30
+            });
+        }
+
+
+        cout1++;
+    });
+
     replace_count($tr_new,"id",count);
 
     var $img = $tr_new.find("img.add_img");
@@ -82,7 +105,116 @@ function add_line(t) {
         addTipso($tr_new);
     }
 
+}
+//人卫社教材编写情况
+function add_rwsjcbx(t){
+    var $tr =$(t).parent("td").parent("tr");
+    var $tbody = $tr.parent();
+    var num =  $tbody.children("tr").length+1;
+    var $table = $("#tab_rwsjcbx");
+    var $tr = $("<tr id='rwsjcbx_"+num+"'>"+
+        "<td><input class='cg_input' maxlength='100' name='pmph_material_name' id='pmph_material_name_"+num+"' value='' style='width: 320px;' placeholder='教材名称'/></td>"+
+        "<td><select id='pmph_rank_"+num+"' name='pmph_rank'>"+
+        "<option value='0'>无</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
+        "</select></td>"+
+        "<td><select id='pmph_position_"+num+"' name='pmph_position'>"+
+        "<option value='0'>无</option>"+
+        "<option value='1'>主编</option>"+
+        "<option value='2'>副主编</option>"+
+        "<option value='3'>编委</option>"+
+        "</select></td>"+
+        "<td style='color: #333333;'>"+
+        "<table class='radio_tb' style='width: 80px;'><tr>"+
+        "<td><input type='radio' name='pmph_is_digital_editor_"+num+"' value='1' />是</td>"+
+        "<td><input type='radio' name='pmph_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
+        "</tr></table>"+
+        "<input type='hidden' name='pmph_is_digital_editor' value='pmph_is_digital_editor_"+num+"' /></td>"+
+        "<td><input class='cg_input' id='pmph_publish_date_"+num+"' placeholder='出版时间' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='pmph_publish_date' value='' style='width: 100px;'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='pmph_isbn' value='' id='pmph_isbn_"+num+"'  style='width: 100px;' placeholder='978-7-117-'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='pmph_note' value='' placeholder='备注' style='width: 140px;'/>" +
+        "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+"' />" +
+        "<input type='hidden' name='pmph_id' value=''>"+
+        //    "<input type='hidden' name='zdjy' value='pmph_material_name_"+num+",pmph_isbn_"+num+",pmph_publish_date_"+num+"' />" +
+        "</td>"+
+        "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr1('rwsjcbx_"+num+"')\"/></td>"+
+        "</tr>");
+    $table.append($tr);
+    addTipso($tr);
+    $('#pmph_rank_'+num).selectlist({
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $('#pmph_position_'+num).selectlist({
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $tr.calendar();
 
+}
+
+//其他社教材编写情况
+function add_jcbx(t){
+    var $tr =$(t).parent("td").parent("tr");
+    var $tbody = $tr.parent();
+    var num =  $tbody.children("tr").length+1;
+    var $table = $("#tab_qtjcbxqk");
+    var $tr = $("<tr id='jcbx_"+num+"'>"+
+        "<td><input class='cg_input' maxlength='100' name='jcb_material_name' id='jcb_material_name_"+num+"' value='' style='width: 200px;' placeholder='教材名称'/></td>"+
+        "<td><select id='jcb_rank_"+num+"' name='jcb_rank'>"+
+        "<option value='0'>无</option>"+
+        "<option value='1'>国际</option>"+
+        "<option value='2'>国家</option>"+
+        "<option value='3'>省部</option>"+
+        "<option value='4'>市级</option>"+
+        "</select></td>"+
+        "<td><select id='jcb_position_"+num+"' name='jcb_position'>"+
+        "<option value='0'>无</option>"+
+        "<option value='1'>主编</option>"+
+        "<option value='2'>副主编</option>"+
+        "<option value='3'>编委</option>"+
+        "</select></td>"+
+        "<td style='color: #333333;'>"+
+        "<table class='radio_tb' style='width: 80px;'><tr>"+
+        "<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='1' />是</td>"+
+        "<td><input type='radio' name='jcb_is_digital_editor_"+num+"' value='0' checked='checked'/>否</td>"+
+        "</tr></table>"+
+        "<input type='hidden' name='jcb_is_digital_editor' value='jcb_is_digital_editor_"+num+"' /></td>"+
+        "<td><input class='cg_input' maxlength='50' name='jcb_publisher' id='jcb_publisher_"+num+"' value='' style='width: 100px;' placeholder='出版社'/></td>"+
+        "<td><input class='cg_input' placeholder='出版时间' id='jcb_publish_date_"+num+"' calendar format=\"'yyyy-mm-dd'\"  z-index='100' name='jcb_publish_date' value='' style='width: 100px;'/></td>"+
+        "<td><input class='cg_input' maxlength='50' name='jcb_isbn' id='jcb_isbn_"+num+"' value='' style='width: 100px;' placeholder='978-7-'/></td>"+
+        "<td><input class='cg_input' maxlength='100' name='jcb_note' value='' placeholder='备注' style='width:130px;'/>" +
+        "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+"' />" +
+        "<input type='hidden' name='jcb_id' value=''>"+
+        //    "<input type='hidden' name='zdjy' value='jcb_material_name_"+num+",jcb_publisher_"+num+",jcb_isbn_"+num+",jcb_publish_date_"+num+"' />" +
+        "</td>"+
+        "<td><img class='add_img' src='"+contextpath+"statics/image/del.png' onclick=\"javascript:del_tr1('qtjcbxqk_"+num+"')\"/></td>"+
+        "</tr>");
+    $table.append($tr);
+    addTipso($tr);
+    $('#jcb_position_'+num).selectlist({
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $('#jcb_rank_'+num).selectlist({
+        width: 110,
+        height: 30,
+        optionHeight: 30
+    });
+    $tr.calendar();
+
+}
+
+//删除表格tr
+function del_tr1(trId){
+    //  document.getElementById(trId).remove();
+    $("#"+trId).remove();
 }
 
 function del_tr(t){

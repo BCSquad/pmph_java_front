@@ -97,7 +97,7 @@
                 <value>/expertation/toSearchOrg.action* -> 1</value> <!-- 临床申报 选择申报学校 -->
                 <value>/research/tolist.action* -> 1</value><!--调研表  列表页面-->
                 <value>/course/teacher/* -> 1</value><!--课程选书  页面-->
-
+                <value>/login.action* -> 1</value> <!-- 临床申报 机构审核 -->
                 <!--机构用户-->
                 <value>/user/* -> 2</value><!--用户管理（机构用户） -->
                 <value>/schedule/* -> 2</value><!--机构用户待办事项 -->
@@ -114,6 +114,7 @@
                 <value>/userinfo/toNoAccessToAuthority* -> 2</value>
                 <value>/admininfocontroller/tochangepwd.action -> 2</value>
 				<value>/expertation/doExpertationAuditPass.action* -> 2</value> <!-- 临床申报 机构审核 -->
+                <value>/login.action* -> 2</value> <!-- 临床申报 机构审核 -->
 
             </set>
         </property>

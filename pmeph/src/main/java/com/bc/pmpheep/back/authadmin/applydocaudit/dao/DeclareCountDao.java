@@ -37,8 +37,8 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> findNameList(Map<String, Object> paraMap);
-	
 
+	List<Map<String, Object>> findNameList2(Map<String, Object> paraMap);
 
 	/**
 	 * 
@@ -60,7 +60,9 @@ public interface DeclareCountDao {
 	 * @throws
 	 */
 	List<Map<String, Object>> selectResults(Map<String, Object> paraMap);
-	
+	List<Map<String, Object>> selectResults2(Map<String, Object> paraMap);
+
+
 
 
 }

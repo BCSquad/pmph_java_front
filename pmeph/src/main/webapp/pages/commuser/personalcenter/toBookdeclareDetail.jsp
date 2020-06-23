@@ -174,8 +174,8 @@
 								${topicMap.realname}
 							</td>
 							<td><span>性&emsp;&emsp;别：&emsp;&emsp;</span>
-								<c:if test="${topicMap.sex=='0'}">男</c:if>
-								<c:if test="${topicMap.sex=='1'}">女</c:if>
+								<c:if test="${topicMap.sex=='1'}">男</c:if>
+								<c:if test="${topicMap.sex=='2'}">女</c:if>
 							</td>
 							<td><span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
 								${topicMap.price}
@@ -355,8 +355,8 @@
 							<tr id="sbbz_${status.count}">
 								<td>${list.realname}</td>
 								<td>
-									<c:if test="${list.sex == '0'}">男</c:if>
-									<c:if test="${list.sex == '1'}">女</c:if>
+									<c:if test="${list.sex == '1'}">男</c:if>
+									<c:if test="${list.sex == '2'}">女</c:if>
 								</td>
 								<td>${list.price}</td>
 								<td>${list.workplace}</td>

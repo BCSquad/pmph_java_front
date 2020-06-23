@@ -6,7 +6,7 @@
 	<!--分页查询条件查询列表 -->
 	<select id="findDataAudit" resultType="java.util.Map" parameterType="com.bc.pmpheep.back.plugin.PageParameter">
 		<![CDATA[SELECT
-		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,group_concat(DISTINCT concat(t.textbook_name,'-',(case  
+		d.id as did,d.realname as drealname,d.position as dposition, d.title as dtitle,t.textbook_name,group_concat(DISTINCT concat(t.textbook_name,'-',(case
 		when p.preset_position=0 OR  p.preset_position IS NULL  then '无' 
 		when p.preset_position = 4 then '主编' 																															
 		when p.preset_position = 2 then '副主编' 
@@ -25,7 +25,10 @@
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
 		else '无'  end )) SEPARATOR '\n') as bpp,
 		p.preset_position,
+		group_concat(	p.preset_position  ORDER BY t.textbook_name  SEPARATOR '-') as preset_position2,
 		t.textbook_name,
+		group_concat(t.textbook_name ORDER BY t.textbook_name  SEPARATOR '-') as textbook_name2,
+
 		(case  when d.online_progress=0  then '未提交'
 		when d.online_progress=1  then '未审核' 
 		when d.online_progress=2  then '已退回' 
@@ -166,6 +169,8 @@
 		when p.preset_position = 15 then '数字编委,主编,编委,副主编'
 		else '无'  end )) SEPARATOR '\n') as bpp,
 		p.preset_position,
+			group_concat(ifnull(p.preset_position,"未选择")  ORDER BY t.textbook_name  SEPARATOR '-') as preset_position2,
+				group_concat(t.textbook_name ORDER BY t.textbook_name  SEPARATOR '-') as textbook_name2,
 		t.textbook_name,
 		(case  when d.online_progress=0  then '未提交'
 		when d.online_progress=1  then '未审核' 

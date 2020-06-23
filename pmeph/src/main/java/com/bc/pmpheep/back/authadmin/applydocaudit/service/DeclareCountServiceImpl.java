@@ -50,6 +50,12 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		return list;
 	}
 
+	@Override
+	public List<Map<String, Object>> findNameList2(Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao.findNameList2(paraMap);
+		return list;
+	}
+
 
 
 	/**
@@ -60,7 +66,12 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		List<Map<String, Object>> list = declareCountDao.selectAll(paraMap);
 		return list;
 	}
-	
+	@Override
+	public List<Map<String, Object>> selectAll2(Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao.selectAll2(paraMap);
+		return list;
+	}
+
 	/**
 	 * 最终结果名单
 	 * 查看全部
@@ -70,6 +81,11 @@ public class DeclareCountServiceImpl implements DeclareCountService {
 		List<Map<String, Object>> list = declareCountDao.selectResults(paraMap);
 		return list;
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> selectResults2(Map<String, Object> paraMap) {
+		List<Map<String, Object>> list = declareCountDao.selectResults2(paraMap);
+		return list;
+	}
 
 }

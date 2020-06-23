@@ -61,6 +61,9 @@ public class UserService {
         return userDao.getUserInfo(username, usertype);
     }
 
+    public Map<String, Object> getUserInfo2(String username, String usertype) {
+        return userDao.getUserInfo2(username, usertype);
+    }
 
     public List<Map<String, Object>> getUserType(String username) {
         return userDao.getUserType(username);

@@ -401,7 +401,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : stuList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerStu(map);
                     }else{
                         map.put("user_id", user_id);
@@ -418,7 +418,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : workList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerWork(map);
                     }else {
                         map.put("user_id", user_id);
@@ -435,7 +435,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : steaList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerStea(map);
                     }else {
                         map.put("user_id", user_id);
@@ -452,7 +452,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : zjxsList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerZjxs(map);
                     }else {
                         map.put("user_id", user_id);
@@ -469,7 +469,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : jcbjList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerJcbj(map);
                     }else {
                         map.put("user_id", user_id);
@@ -486,7 +486,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : gjkcjsList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerGjkcjs(map);
                     }else {
                         map.put("user_id", user_id);
@@ -503,7 +503,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : gjghjcList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerGjghjc(map);
                     }else {
                         map.put("user_id", user_id);
@@ -520,7 +520,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : jcbxList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerJcbx(map);
                     }else {
                         map.put("user_id", user_id);
@@ -537,7 +537,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : zjkyList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerZjkyqk(map);
                     }else {
                         map.put("user_id", user_id);
@@ -574,7 +574,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : monographList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerMonograph(map);
                     }else {
                         map.put("user_id", user_id);
@@ -591,7 +591,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : publishList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerPublish(map);
                     }else {
                         map.put("user_id", user_id);
@@ -608,7 +608,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : sciList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerSci(map);
                     }else {
                         map.put("user_id", user_id);
@@ -625,7 +625,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : clinicalList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerClinicalreward(map);
                     }else {
                         map.put("user_id", user_id);
@@ -642,7 +642,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : acadeList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerAcadereward(map);
                     }else {
                         map.put("user_id", user_id);
@@ -659,7 +659,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : pmphList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerRwsjc(map);
                     }else {
                         map.put("user_id", user_id);
@@ -779,7 +779,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : stuList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerStu(map);
                     }else{
                         map.put("user_id", user_id);
@@ -796,7 +796,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : workList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerWork(map);
                     }else {
                         map.put("user_id", user_id);
@@ -813,7 +813,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : steaList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerStea(map);
                     }else {
                         map.put("user_id", user_id);
@@ -830,7 +830,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : zjxsList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerZjxs(map);
                     }else {
                         map.put("user_id", user_id);
@@ -847,7 +847,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : jcbjList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerJcbj(map);
                     }else {
                         map.put("user_id", user_id);
@@ -864,7 +864,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : gjkcjsList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerGjkcjs(map);
                     }else {
                         map.put("user_id", user_id);
@@ -881,7 +881,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : gjghjcList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerGjghjc(map);
                     }else {
                         map.put("user_id", user_id);
@@ -898,7 +898,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : jcbxList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerJcbx(map);
                     }else {
                         map.put("user_id", user_id);
@@ -915,7 +915,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : zjkyList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerZjkyqk(map);
                     }else {
                         map.put("user_id", user_id);
@@ -944,7 +944,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : monographList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerMonograph(map);
                     }else {
                         map.put("user_id", user_id);
@@ -961,7 +961,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : publishList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerPublish(map);
                     }else {
                         map.put("user_id", user_id);
@@ -978,7 +978,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : sciList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerSci(map);
                     }else {
                         map.put("user_id", user_id);
@@ -995,7 +995,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : clinicalList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerClinicalreward(map);
                     }else {
                         map.put("user_id", user_id);
@@ -1012,7 +1012,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : acadeList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerAcadereward(map);
                     }else {
                         map.put("user_id", user_id);
@@ -1029,7 +1029,7 @@ public class MaterialDetailServiceImpl implements MaterialDetailService {
             for (Map<String, Object> map : pmphList) {
                 if(perMap.get("type").equals("1")){ //提交
                     String per_id = utool.getUUID();
-                    if(!map.get("per_id").equals("")) {
+                    if(!map.get("per_id").equals("")&&!map.get("per_id").equals("-")) {
                         this.peradd.updatePerRwsjc(map);
                     }else {
                         map.put("user_id", user_id);

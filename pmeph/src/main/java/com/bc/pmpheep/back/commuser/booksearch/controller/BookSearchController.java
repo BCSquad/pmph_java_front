@@ -121,9 +121,15 @@ public class BookSearchController extends BaseController {
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		Integer pageSize = Integer.parseInt(request.getParameter("pageSize"));
 		String queryName = request.getParameter("queryName");
-        
-		
-		
+
+		String str="; \' \\\" \" < > () , \\ / script svg alert confirm prompt onload onmouseover onfocus onerror xss";
+			String[] split = str.split(" ");
+			for(String s:split){
+				if(queryName.contains(s)){
+					queryName=queryName.replaceAll(s,"");
+				}
+			}
+
 		String sortid=request.getParameter("id");
         Map<String,Object> bigsort=new HashMap<String, Object>();;
         List<Map<String,Object>> smallsort=null;

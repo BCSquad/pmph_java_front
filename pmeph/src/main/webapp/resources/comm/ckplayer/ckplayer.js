@@ -62,9 +62,9 @@ function ckplayerConfig() {
 			//需要支持的事件
 		},
 		menu: { //版权名称支持
-			ckkey: '',
+			ckkey: 'pmph',
 			name: '',
-			link: '',
+			link: 'medu.pmph.com',
 			version: '',
 			domain: '',
 			more: []

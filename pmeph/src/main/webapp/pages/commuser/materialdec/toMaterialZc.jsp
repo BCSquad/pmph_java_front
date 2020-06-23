@@ -7,6 +7,7 @@
 <head>
     <script type="text/javascript">
         var contextpath = '${pageContext.request.contextPath}/';
+        var is_multi_position= '${materialMap.is_multi_position}';
     </script>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
     <title>申报表修改</title>
@@ -38,6 +39,14 @@
         scrollbar-track-color: #666; /*立体滚动条背景颜色*/
         scrollbar-base-color:#f8f8f8; /*滚动条的基本颜色*/
         Cursor:url(mouse.cur); /*自定义个性鼠标*/
+    }
+    .select-list ul::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: rgba(0,0,0,0.2);
+    }
+    #xz1 .select-list {
+        z-index: 200 !important;
     }
 </style>
 <body>
@@ -116,7 +125,7 @@
 
                                         <c:forEach items="${pmphPosition}" var="dic">
 
-                                            <td><input type="radio" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
+                                            <td><input type="rapreset_positiondio" id="zw_1" name="zw_1" value="${dic.code}" />${dic.name}</td>
 
                                         </c:forEach>
                                      <%--   <td><input type="radio" id="zw_1" name="zw_1" value="4"/>主编</td>
@@ -140,8 +149,27 @@
                         </div>
                     </div>
                 </c:if>
+                <script>
+                    var result2=[];
+                    $(function () {
+                        <c:forEach items="${pmphPosition}" var="dic">
+                        var item={};
+                        item.code="${dic.code}";
+                        item.name="${dic.name}";
+                        result2.push(item)
+                        </c:forEach>
+
+                        console.log("${checkPositon}")
+                    })
+                </script>
+
+
+
+
+
+
                 <c:forEach var="list" items="${tssbList}" varStatus="status">
-                    <div class="item" id="xz1">
+                    <div class="item" id="xz_${status.index}">
                         <div style="float: left">
                         <span style="float: left;line-height: 30px;">图书：</span>
                         <select id="edu_${status.count}" name="textbook_id" class="st" data-valid="isNonEmpty"
@@ -219,7 +247,7 @@
                                                    value="1" ${list.preset_position=='1'?'checked':'' }/>编委
                                         </td>--%>
                                         <c:forEach items="${pmphPosition}" var="dic">
-                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'selected':'' }  />${dic.name}</td>
+                                            <td><input type="radio" id="zw_1" name="zw_1_${status.count}" value="${dic.code}"  ${list.preset_position==dic.code?'checked':'' }  />${dic.name}</td>
                                         </c:forEach>
                                         <c:if test="${materialMap.is_digital_editor_optional =='1'}">
                                             <td><input type="radio" name="zw_1_${status.count}"
@@ -254,6 +282,7 @@
                             <div class="scys" id="scjxdg_${status.count}"><span>上传文件</span></div>
                             <input type="hidden" name="scfjb" id="scfjb" value="${status.count}">
                         </div>
+                        <div class='delBtn pull-right'  onclick="javascript:delTsxz( 'xz_${status.index}')"><span>删除</span></div>
                     </div>
                 </c:forEach>
             </div>
@@ -848,7 +877,7 @@
                                     </table>
                                     <input type="hidden" name="jc_is_digital_editor" value="jc_is_digital_editor_a"/>
                                 </td>
-                                <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true"
+                                <td><input class="cg_input" name="jc_publisher" value="" readonly="true"
                                            style="width: 100px;" maxlength="20"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date" value=""
                                            placeholder="出版时间" calendar format="'yyyy-mm-dd'" z-index="100"
@@ -899,7 +928,7 @@
                                     <input type="hidden" name="jc_is_digital_editor"
                                            value="jc_is_digital_editor_${status.count}"/>
                                 </td>
-                                <td><input class="cg_input" name="jc_publisher" value="人民卫生出版社" readonly="true"
+                                <td><input class="cg_input" name="jc_publisher" value="" readonly="true"
                                            style="width: 100px;" maxlength="20"/></td>
                                 <td><input class="cg_input" name="jc_publish_date" id="jc_publish_date_${status.count}"
                                             placeholder="出版时间" calendar  value="${list.publish_date}"
@@ -1039,7 +1068,7 @@
                                 </td>
                                 <td>
                                     <select id="pmph_position" name="pmph_position">
-                                        <c:forEach items="${pmphPosition}" var="dic">
+                                        <c:forEach items="${pmphPosition2}" var="dic">
                                             <option value="${dic.code}" >${dic.name}</option>
                                         </c:forEach>
                                         <%--<option value="0">无</option>
@@ -1095,7 +1124,7 @@
                                 </td>
                                 <td>
                                     <select id="pmph_position_${status.count}" name="pmph_position">
-                                        <c:forEach items="${pmphPosition}" var="dic">
+                                        <c:forEach items="${pmphPosition2}" var="dic">
                                             <option value="${dic.code}" ${list.position==dic.code?'selected':''}>${dic.name}</option>
                                         </c:forEach>
                                         <%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
@@ -1192,7 +1221,7 @@
                                 </td>
                                 <td>
                                     <select id="jcb_position" name="jcb_position">
-                                        <c:forEach items="${pmphPosition}" var="dic">
+                                        <c:forEach items="${pmphPosition2}" var="dic">
                                             <option value="${dic.code}" >${dic.name}</option>
                                         </c:forEach>
                                         <%--<option value="0">无</option>
@@ -1249,7 +1278,7 @@
                                 </td>
                                 <td>
                                     <select id="jcb_position_${status.count}" name="jcb_position">
-                                        <c:forEach items="${pmphPosition}" var="dic">
+                                        <c:forEach items="${pmphPosition2}" var="dic">
                                             <option value="${dic.code}" ${list.position==dic.code?'selected':'' }>${dic.name}</option>
                                         </c:forEach>
                                         <%--<option value="0" ${list.position=='0'?'selected':'' }>无</option>
@@ -1685,7 +1714,7 @@
                         <c:if test="${empty sciList[0]}">
                             <tr>
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name" value=""
-                                           style="width: 410px;" placeholder="论文名称" maxlength="1000"/></td>
+                                           style="width: 410px;" placeholder="论文名称" maxlength="1500"/></td>
                                 <td><input class="cg_input" name="sci_journal_name" id="sci_journal_name" value=""
                                            style="width: 130px;" placeholder="期刊名称" maxlength="50"/></td>
                                 <td><input class="cg_input" name="sci_factor" id="sci_factor" value=""
@@ -1704,7 +1733,7 @@
                         <c:forEach var="list" items="${sciList}" varStatus="status">
                             <tr id="sci_${status.count}">
                                 <td><input class="cg_input" name="sci_paper_name" id="sci_paper_name_${status.count}"
-                                           value="${list.paper_name}" style="width: 410px;" maxlength="1000" placeholder="论文名称"
+                                           value="${list.paper_name}" style="width: 410px;" maxlength="1500" placeholder="论文名称"
                                            maxlength="1000"/></td>
                                 <td><input class="cg_input" name="sci_journal_name"
                                            id="sci_journal_name_${status.count}" value="${list.journal_name}"

@@ -193,8 +193,8 @@
 							<td><span><span class="btbs">*</span>性&emsp;&emsp;别：&emsp;&emsp;</span>
 								<select name="sex" id="sex">
 									<option value="">-请选择-</option>
-									<option value="0" ${topicMap.sex=='0'?'selected':''}>男</option>
-									<option value="1" ${topicMap.sex=='1'?'selected':''}>女</option>
+									<option value="0" ${topicMap.sex=='1'?'selected':''}>男</option>
+									<option value="1" ${topicMap.sex=='2'?'selected':''}>女</option>
 								</select>
 							</td>
 							<td><span><span class="btbs">*</span>年&emsp;&emsp;龄：&emsp;&emsp;</span>
@@ -398,8 +398,8 @@
 								<td>
 									<select id="write_sex_${status.count}" name="write_sex">
 										<option value="">-请选择-</option>
-										<option value="0" ${list.sex=='0'?'selected':''}>男</option>
-										<option value="1" ${list.sex=='1'?'selected':''}>女</option>
+										<option value="0" ${list.sex=='1'?'selected':''}>男</option>
+										<option value="1" ${list.sex=='2'?'selected':''}>女</option>
 									</select>
 								</td>
 								<td><input class="sb_input" style="width: 70px;" name="write_price" placeholder="年龄" value="${list.price}" id="write_price_${status.count}"

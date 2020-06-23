@@ -60,17 +60,15 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 		Map<String,Object> resultMap= new HashMap<String,Object>();
 		String selectedIds= (String) paraMap.get("selectedIds");
 		String selectedNumIds= (String) paraMap.get("selectedNumIds");
-		if (selectedIds==null || selectedIds.length()==0) {
-			selectedIds = "-100"; //sql中此数组不可为空，当为空时，给予不可能出现的id（从1开始自增，无负数）
-			paraMap.put("selectedIds", selectedIds);
-		}
-		if (selectedNumIds==null || selectedNumIds.length()==0) {
-			selectedNumIds = "-100"; //sql中此数组不可为空，当为空时，给予不可能出现的id（从1开始自增，无负数）
-			paraMap.put("selectedNumIds", selectedNumIds);
-		}
-		
 		Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
-		Integer copy_count = chooseEditorDao.copyTempBySelectedIds(paraMap);
+		Integer copy_count=0;
+		if(selectedIds!=null&&selectedIds!=""){
+			copy_count= chooseEditorDao.copyTempBySelectedIds(paraMap);
+		}
+		if (selectedNumIds!=null&&selectedNumIds!=""){
+			copy_count = chooseEditorDao.copyTempBySelectedIds2(paraMap);
+		}
+
 		paraMap.put("is_list_selected", 0);
 		Integer b_count=chooseEditorDao.updateTextBookListSelected(paraMap);
 		//暂存数字编委
@@ -88,27 +86,34 @@ public class ChooseEditorServiceImpl implements ChooseEditorService {
 		resultMap = paraMap;
 		String selectedIds= (String) paraMap.get("selectedIds");
 		String selectedNumIds= (String) paraMap.get("selectedNumIds");
-		if (selectedIds==null || selectedIds.length()==0) {
-			selectedIds = "-100"; //sql中此数组不可为空，当为空时，给予不可能出现的id（从1开始自增，无负数）
-			paraMap.put("selectedIds", selectedIds);
-		}
-		if (selectedNumIds==null || selectedNumIds.length()==0) {
-			selectedNumIds = "-100"; //sql中此数组不可为空，当为空时，给予不可能出现的id（从1开始自增，无负数）
-			paraMap.put("selectedNumIds", selectedNumIds);
-		}
-		
+
 		Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
-		Integer copy_count = chooseEditorDao.copyTempBySelectedIds(paraMap);
 		//保存编委和数字编委
-		Integer u_count = chooseEditorDao.updateDecPositionBySelectIds(paraMap);
+		Integer copy_count=0;
+		if(selectedIds!=null&&selectedIds!=""){
+			copy_count= chooseEditorDao.copyTempBySelectedIds(paraMap);
+		}
+		if (selectedNumIds!=null&&selectedNumIds!=""){
+			copy_count = chooseEditorDao.copyTempBySelectedIds2(paraMap);
+		}
 		//保存数字编委
 		//chooseEditorDao.updateDecPositionBySelectNumIds(paraMap);
-		if (u_count>0) {
+		if (copy_count>0) {
 			//Integer del_count = chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
 			paraMap.put("is_list_selected", 1);
 			Integer b_count=chooseEditorDao.updateTextBookListSelected(paraMap);
 			
-			if (u_count >=0 && b_count>0) {
+			if (copy_count >=0 && b_count>0) {
+				List<Map<String, Object>> maps = chooseEditorDao.selectTempByTextBookId(paraMap);
+				for(Map<String, Object> map:maps){
+					Map<String, Object> params=new HashMap<>();
+					Object declaration_id = map.get("declaration_id");
+					Object chosen_position = map.get("chosen_position");
+					params.put("declaration_id",declaration_id);
+					params.put("chosen_position" , chosen_position);
+					Integer integer = chooseEditorDao.updateDecPostion(params);
+				}
+
 				chooseEditorDao.deleteTempByAuthorIdAndTextbookId(paraMap);
 				resultMap.put("msg", "已提交,主编已选定编委");
 			}

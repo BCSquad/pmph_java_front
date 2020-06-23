@@ -181,7 +181,8 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
 		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
 		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
-		mav.addObject("pmphPosition",materialPositions!=null?materialPositions:dataDictionaryListByType );
+		mav.addObject("pmphPosition",materialPositions.size()!=0?materialPositions:dataDictionaryListByType );
+        mav.addObject("pmphPosition2",dataDictionaryListByType);
 		mav.addObject("bookSelects", bookSelects.toString());
 		mav.addObject("orgSelects", orgSelects.toString());
 		mav.addObject("materialMap", materialMap);
@@ -810,7 +811,7 @@ public class MaterialDetailController extends BaseController{
 
 				String post =map.get("preset_position").toString();
 				String post2="";
-				if (post != null) {
+				if (post != null&&post!="") {
 					if (ObjectUtil.isNumber(post)) {
 						if(Integer.parseInt(post)==8){
 							post="数字编委";
@@ -1096,7 +1097,8 @@ public class MaterialDetailController extends BaseController{
 		mav.addObject("writerUserDegree", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_DEGREE));
 		mav.addObject("writerUserTitle", dataDictionaryService.getDataDictionaryListByType(Const.WRITER_USER_TITLE));
 		mav.addObject("pmphRank", dataDictionaryService.getDataDictionaryListByType(Const.PMPH_RANK));
-		mav.addObject("pmphPosition",materialPositions!=null?materialPositions:dataDictionaryListByType);
+		mav.addObject("pmphPosition",materialPositions.size()!=0?materialPositions:dataDictionaryListByType);
+        mav.addObject("pmphPosition2",dataDictionaryListByType);
 
 		//填充
         mav.addObject("declarationCount",declarationCount);
