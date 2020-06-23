@@ -2,40 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao">
-	<!--分页查询条件查询列表 -->
-	<select id="findDeclareCount" resultType="java.util.Map"
-		parameterType="java.util.Map">
-		select
-		t.textbook_name,
-        sum(case when p.preset_position   &amp;  4 >0 then 1 else 0 end) as decid1,
-        sum(case when p.preset_position   &amp;  2 >0 then 1 else 0 end) as decid2,
-        sum(case when p.preset_position   &amp;  1 >0 then 1 else 0 end) as decid3,
-        sum(case when p.preset_position   &amp;  8 >0  then 1 else 0 end) as decid4,
-        sum(case when dp.chosen_position  &amp;  4 >0 then 1 else 0 end) as dp1,
-        sum(case when dp.chosen_position  &amp;  2 >0  then 1 else 0 end) as dp2,
-        sum(case when dp.chosen_position  &amp;  1 >0 then 1 else 0 end) as dp3,
-        sum(case when dp.chosen_position  &amp;  8 >0  then 1 else 0 end) as dp4
+        namespace="com.bc.pmpheep.back.authadmin.applydocaudit.dao.DeclareCountDao">
+    <!--分页查询条件查询列表 -->
+    <select id="findDeclareCount" resultType="java.util.Map"
+            parameterType="java.util.Map">
+        select
+        t.textbook_name,
+        sum(case when p.preset_position &amp; 4 >0 then 1 else 0 end) as decid1,
+        sum(case when p.preset_position &amp; 2 >0 then 1 else 0 end) as decid2,
+        sum(case when p.preset_position &amp; 1 >0 then 1 else 0 end) as decid3,
+        sum(case when p.preset_position &amp; 8 >0 then 1 else 0 end) as decid4,
+        sum(case when dp.chosen_position &amp; 4 >0 then 1 else 0 end) as dp1,
+        sum(case when dp.chosen_position &amp; 2 >0 then 1 else 0 end) as dp2,
+        sum(case when dp.chosen_position &amp; 1 >0 then 1 else 0 end) as dp3,
+        sum(case when dp.chosen_position &amp; 8 >0 then 1 else 0 end) as dp4
         from textbook t
-        left join declaration as d on  d.material_id = t.material_id
+        left join declaration as d on d.material_id = t.material_id
         left JOIN org_user as ou on d.org_id=ou.org_id
-        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id  AND  dp.declaration_id=d.id
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id AND dp.declaration_id=d.id
         LEFT JOIN dec_position p ON t.id=p.textbook_id and p.declaration_id=d.id
-		<where>
-			1=1
+        <where>
+            1=1
 
-				and t.material_id = ${material_id}
+            and t.material_id = ${material_id}
 
 
-				and ou.id=${userId}
+            and ou.id=${userId}
 
-		</where>
-		GROUP BY t.id
-		HAVING (decid1>=1 or decid2>=1 or decid3>=1 or decid4>=1)
-	</select>
+        </where>
+        GROUP BY t.id
+        HAVING (decid1>=1 or decid2>=1 or decid3>=1 or decid4>=1)
+    </select>
 
-	<select id="findDeclareCount2" resultType="java.util.Map"
-			parameterType="java.util.Map">
+    <select id="findDeclareCount2" resultType="java.util.Map"
+            parameterType="java.util.Map">
 		SELECT
 		t.textbook_name,
 		sum( CASE WHEN de.preset_position = 1 THEN 1 ELSE 0 END ) AS decid1,
@@ -67,119 +67,118 @@
 	</select>
 
 
-
-	<!-- 查看全部 我校申报情况统计 -->
-	<select id="selectAll" resultType="java.util.Map" parameterType="java.util.Map">
-		select
-		t.textbook_name,
-        sum(case when p.preset_position   &amp;  4 >0 then 1 else 0 end) as decid1,
-        sum(case when p.preset_position   &amp;  2 >0 then 1 else 0 end) as decid2,
-        sum(case when p.preset_position   &amp;  1 >0 then 1 else 0 end) as decid3,
-        sum(case when p.preset_position   &amp;  8 >0  then 1 else 0 end) as decid4,
-        sum(case when dp.chosen_position  &amp;  4 >0 then 1 else 0 end) as dp1,
-        sum(case when dp.chosen_position  &amp;  2 >0  then 1 else 0 end) as dp2,
-        sum(case when dp.chosen_position  &amp;  1 >0 then 1 else 0 end) as dp3,
-        sum(case when dp.chosen_position  &amp;  8 >0  then 1 else 0 end) as dp4
+    <!-- 查看全部 我校申报情况统计 -->
+    <select id="selectAll" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        t.textbook_name,
+        sum(case when p.preset_position &amp; 4 >0 then 1 else 0 end) as decid1,
+        sum(case when p.preset_position &amp; 2 >0 then 1 else 0 end) as decid2,
+        sum(case when p.preset_position &amp; 1 >0 then 1 else 0 end) as decid3,
+        sum(case when p.preset_position &amp; 8 >0 then 1 else 0 end) as decid4,
+        sum(case when dp.chosen_position &amp; 4 >0 then 1 else 0 end) as dp1,
+        sum(case when dp.chosen_position &amp; 2 >0 then 1 else 0 end) as dp2,
+        sum(case when dp.chosen_position &amp; 1 >0 then 1 else 0 end) as dp3,
+        sum(case when dp.chosen_position &amp; 8 >0 then 1 else 0 end) as dp4
         from textbook t
-        left join declaration as d on  d.material_id = t.material_id
+        left join declaration as d on d.material_id = t.material_id
         left JOIN org_user as ou on d.org_id=ou.org_id
-        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id AND  dp.declaration_id=d.id
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id AND dp.declaration_id=d.id
         LEFT JOIN dec_position p ON t.id=p.textbook_id and p.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-	</select>
-	<!-- 查看全部 我校申报情况统计 -->
-	<select id="selectAll2" resultType="java.util.Map" parameterType="java.util.Map">
-		select
-		t.textbook_name,
-		sum(case when p.preset_position =1 then 1 else 0 end) as decid1,
-		sum(case when p.preset_position  =2 then 1 else 0 end) as decid2,
-		sum(case when p.preset_position  =3 then 1 else 0 end) as decid3,
-		sum(case when p.preset_position  =8 then 1 else 0 end) as decid4,
-		sum(case when dp.chosen_position =1 then 1 else 0 end) as dp1,
-		sum(case when dp.chosen_position =2  then 1 else 0 end) as dp2,
-		sum(case when dp.chosen_position  =3 then 1 else 0 end) as dp3,
-		sum(case when dp.chosen_position =4 then 1 else 0 end) as dp4
-		from textbook t
-		left join declaration as d on  d.material_id = t.material_id
-		left JOIN org_user as ou on d.org_id=ou.org_id
-		LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id AND  dp.declaration_id=d.id
-		LEFT JOIN dec_position p ON t.id=p.textbook_id and p.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-	</select>
-
-	<!--最终结果名单列表 加载更多 -->
-	<select id="findNameList" resultType="java.util.Map"
-		parameterType="java.util.Map">
-		select t.*,COUNT(zb) as zb,COUNT(fb) as fb,COUNT(bw) as bw ,COUNT(szbw) as szbw from (
-		SELECT
-		t.id,
-		t.textbook_name,
-		GROUP_CONCAT( ( case when dp.chosen_position &amp;  4 >0 then d.realname END ) ) AS zb,
-		GROUP_CONCAT( ( case when dp.chosen_position &amp;  2 >0 then d.realname END ) ) AS fb,
-		GROUP_CONCAT( ( case when dp.chosen_position &amp;  1 >0 then d.realname END ) ) AS bw,
-		GROUP_CONCAT( ( case when dp.chosen_position &amp;  8 >0 then d.realname END ) ) AS szbw
-		from textbook t
-        left join declaration as d on  d.material_id = t.material_id
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+    </select>
+    <!-- 查看全部 我校申报情况统计 -->
+    <select id="selectAll2" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        t.textbook_name,
+        sum(case when p.preset_position =1 then 1 else 0 end) as decid1,
+        sum(case when p.preset_position =2 then 1 else 0 end) as decid2,
+        sum(case when p.preset_position =3 then 1 else 0 end) as decid3,
+        sum(case when p.preset_position =8 then 1 else 0 end) as decid4,
+        sum(case when dp.chosen_position =1 then 1 else 0 end) as dp1,
+        sum(case when dp.chosen_position =2 then 1 else 0 end) as dp2,
+        sum(case when dp.chosen_position =3 then 1 else 0 end) as dp3,
+        sum(case when dp.chosen_position =4 then 1 else 0 end) as dp4
+        from textbook t
+        left join declaration as d on d.material_id = t.material_id
         left JOIN org_user as ou on d.org_id=ou.org_id
-		LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-		) t  GROUP BY t.textbook_name
-		HAVING zb>=1 or fb>=1 or bw>=1  or szbw>=1
-	</select>
-	<select id="findNameList2" resultType="java.util.Map"
-			parameterType="java.util.Map">
-		select t.*,COUNT(zb) as zb,COUNT(fb) as fb,COUNT(bw) as bw ,COUNT(szbw) as szbw from (
-		SELECT
-		t.id,
-		t.textbook_name,
-		GROUP_CONCAT( ( case when dp.chosen_position =1 then d.realname END ) ) AS zb,
-		GROUP_CONCAT( ( case when dp.chosen_position =2 then d.realname END ) ) AS fb,
-		GROUP_CONCAT( ( case when dp.chosen_position =3 then d.realname END ) ) AS bw,
-		GROUP_CONCAT( ( case when dp.chosen_position =8 then d.realname END ) ) AS szbw
-		from textbook t
-		left join declaration as d on  d.material_id = t.material_id
-		left JOIN org_user as ou on d.org_id=ou.org_id
-		LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-		) t  GROUP BY t.textbook_name
-		HAVING zb>=1 or fb>=1 or bw>=1  or szbw>=1
-	</select>
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id AND dp.declaration_id=d.id
+        LEFT JOIN dec_position p ON t.id=p.textbook_id and p.declaration_id=d.id
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+    </select>
+
+    <!--最终结果名单列表 加载更多 -->
+    <select id="findNameList" resultType="java.util.Map"
+            parameterType="java.util.Map">
+        select t.*,COUNT(zb) as zb,COUNT(fb) as fb,COUNT(bw) as bw ,COUNT(szbw) as szbw from (
+        SELECT
+        t.id,
+        t.textbook_name,
+        GROUP_CONCAT( ( case when dp.chosen_position &amp; 4 >0 then d.realname END ) ) AS zb,
+        GROUP_CONCAT( ( case when dp.chosen_position &amp; 2 >0 then d.realname END ) ) AS fb,
+        GROUP_CONCAT( ( case when dp.chosen_position &amp; 1 >0 then d.realname END ) ) AS bw,
+        GROUP_CONCAT( ( case when dp.chosen_position &amp; 8 >0 then d.realname END ) ) AS szbw
+        from textbook t
+        left join declaration as d on d.material_id = t.material_id
+        left JOIN org_user as ou on d.org_id=ou.org_id
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+        ) t GROUP BY t.textbook_name
+        HAVING zb>=1 or fb>=1 or bw>=1 or szbw>=1
+    </select>
+    <select id="findNameList2" resultType="java.util.Map"
+            parameterType="java.util.Map">
+        select t.*,COUNT(zb) as zb,COUNT(fb) as fb,COUNT(bw) as bw ,COUNT(szbw) as szbw from (
+        SELECT
+        t.id,
+        t.textbook_name,
+        GROUP_CONCAT( ( case when dp.chosen_position =1 then d.realname END ) ) AS zb,
+        GROUP_CONCAT( ( case when dp.chosen_position =2 then d.realname END ) ) AS fb,
+        GROUP_CONCAT( ( case when dp.chosen_position =3 then d.realname END ) ) AS bw,
+        GROUP_CONCAT( ( case when dp.chosen_position =8 then d.realname END ) ) AS szbw
+        from textbook t
+        left join declaration as d on d.material_id = t.material_id
+        left JOIN org_user as ou on d.org_id=ou.org_id
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+        ) t GROUP BY t.textbook_name
+        HAVING zb>=1 or fb>=1 or bw>=1 or szbw>=1
+    </select>
 
 	<!-- 查看全部 最终结果名单 导出excel -->
 	<select id="selectResults" resultType="java.util.Map">
@@ -191,43 +190,43 @@
         GROUP_CONCAT( ( case when dp.chosen_position &amp;  1 >0 then d.realname END ) ) AS bw,
         GROUP_CONCAT( ( case when dp.chosen_position &amp;  8 >0 then d.realname END ) ) AS szbw
         from textbook t
-        left join declaration as d on  d.material_id = t.material_id
+        left join declaration as d on d.material_id = t.material_id
         left JOIN org_user as ou on d.org_id=ou.org_id
         LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-	</select>
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+    </select>
 
-	<select id="selectResults2" resultType="java.util.Map">
-		SELECT
-		t.id,
-		t.textbook_name,
-		GROUP_CONCAT( ( case when dp.chosen_position =1 then d.realname END ) ) AS zb,
-		GROUP_CONCAT( ( case when dp.chosen_position =2 then d.realname END ) ) AS fb,
-		GROUP_CONCAT( ( case when dp.chosen_position =3 then d.realname END ) ) AS bw,
-		GROUP_CONCAT( ( case when dp.chosen_position =8 then d.realname END ) ) AS szbw
-		from textbook t
-		left join declaration as d on  d.material_id = t.material_id
-		left JOIN org_user as ou on d.org_id=ou.org_id
-		LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
-		<where>
-			1=1
-			<if test="material_id != null and material_id != '' ">
-				and t.material_id = ${material_id}
-			</if>
-			<if test="userId != null and userId != '' ">
-				and ou.id=${userId}
-			</if>
-		</where>
-		GROUP BY t.id
-	</select>
+    <select id="selectResults2" resultType="java.util.Map">
+        SELECT
+        t.id,
+        t.textbook_name,
+        GROUP_CONCAT( ( case when dp.chosen_position =1 then d.realname END ) ) AS zb,
+        GROUP_CONCAT( ( case when dp.chosen_position =2 then d.realname END ) ) AS fb,
+        GROUP_CONCAT( ( case when dp.chosen_position =3 then d.realname END ) ) AS bw,
+        GROUP_CONCAT( ( case when dp.chosen_position =8 then d.realname END ) ) AS szbw
+        from textbook t
+        left join declaration as d on d.material_id = t.material_id
+        left JOIN org_user as ou on d.org_id=ou.org_id
+        LEFT JOIN dec_position_published dp ON t.id=dp.textbook_id and dp.declaration_id=d.id
+        <where>
+            1=1
+            <if test="material_id != null and material_id != '' ">
+                and t.material_id = ${material_id}
+            </if>
+            <if test="userId != null and userId != '' ">
+                and ou.id=${userId}
+            </if>
+        </where>
+        GROUP BY t.id
+    </select>
 
 </mapper>

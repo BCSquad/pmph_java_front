@@ -2,68 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.bc.pmpheep.back.commuser.cms.dao.CmsInfoLettersManagementDao">
-	
-	<select id="getCmsInfoLettersListTotal" resultType="java.lang.Integer">
-		SELECT
-		COUNT(*)
-		FROM
-		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+        namespace="com.bc.pmpheep.back.commuser.cms.dao.CmsInfoLettersManagementDao">
 
-		WHERE
-		cc.is_deleted = 0 and cc.apporpc != 2
-		<if test="materialId==null">
-		  AND ccg.id = 2
-		</if>
-		<if test="materialId!=null">
-		    and material_id=#{materialId}
-		    AND ccg.id in (1,2)
-		</if>
-	</select>
+    <select id="getCmsInfoLettersListTotal" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        cms_content cc
+        LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+        LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
 
-	<select id="list"  resultType="CmsInfoLettersList">
-		SELECT
-		cc.*,me.notice,m.deadline
-		FROM
-		cms_content cc
-		LEFT JOIN pmph_user pu ON cc.author_id =pu.id
-		LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
-		left join  material_extra me on me.material_id=cc.material_id
-		left join material m on m.id=cc.material_id
-		WHERE
-		cc.is_deleted = 0 and cc.is_published=1 and cc.auth_status=2 and cc.apporpc !=2
-		<if test="materialId==null">
-		  AND ccg.id = 2
-		</if>
-		<if test="materialId!=null">
-		    and cc.material_id=#{materialId}
-         <if test="order == 0">
-			 AND ccg.id in (1,2,3)
-		 </if>
-			<if test="order != 0">
-				AND ccg.id in (#{order})
-			</if>
-		</if>
+        WHERE
+        cc.is_deleted = 0 and cc.apporpc != 2
+        <if test="materialId==null">
+            AND ccg.id = 2
+        </if>
+        <if test="materialId!=null">
+            and material_id=#{materialId}
+            AND ccg.id in (1,2)
+        </if>
+    </select>
 
-		ORDER BY
-		<if test="materialId!=null">
-			cc.gmt_create desc
-		</if>
-		<if test="materialId==null">
-			<if test="order == 0">
-				cc.is_promote*cc.sort_promote desc,
-				cc.is_hot*cc.sort_hot desc,
-				cc.auth_date desc
-			</if>
-			<if test="order == 1">
-				cc.auth_date DESC
-			</if>
-			<if test="order == 2">
-				(cc.clicks+cc.comments+cc.likes) desc
-			</if>
-		</if>
-		LIMIT #{start},#{pageSize}
-	</select>
+    <select id="list" resultType="CmsInfoLettersList">
+        SELECT
+        cc.*,me.notice,m.deadline
+        FROM
+        cms_content cc
+        LEFT JOIN pmph_user pu ON cc.author_id =pu.id
+        LEFT JOIN cms_category ccg ON cc.category_id = ccg.id
+        left join material_extra me on me.material_id=cc.material_id
+        left join material m on m.id=cc.material_id
+        WHERE
+        cc.is_deleted = 0 and cc.is_published=1 and cc.auth_status=2 and cc.apporpc !=2
+        <if test="materialId==null">
+            AND ccg.id = 2
+        </if>
+        <if test="materialId!=null">
+            and cc.material_id=#{materialId}
+            <if test="order == 0">
+                AND ccg.id in (1,2,3)
+            </if>
+            <if test="order != 0">
+                AND ccg.id in (#{order})
+            </if>
+        </if>
+
+        ORDER BY
+        <if test="materialId!=null">
+            cc.gmt_create desc
+        </if>
+        <if test="materialId==null">
+            <if test="order == 0">
+                cc.is_stick desc,
+                cc.is_promote*cc.sort_promote desc,
+                cc.is_hot*cc.sort_hot desc,
+                cc.auth_date desc
+            </if>
+            <if test="order == 1">
+                cc.auth_date DESC
+            </if>
+            <if test="order == 2">
+                (cc.clicks+cc.comments+cc.likes) desc
+            </if>
+        </if>
+        LIMIT #{start},#{pageSize}
+    </select>
 </mapper>
